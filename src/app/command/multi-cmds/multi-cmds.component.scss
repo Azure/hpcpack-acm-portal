@@ -76,7 +76,7 @@
 }
 
 .excute-btn {
-  @include display-flex(start, center);
+  @include display-flex(flex-start, center);
   font-size: 13px;
 }
 
