@@ -1,5 +1,6 @@
 <nav mat-tab-nav-bar>
   <a mat-tab-link [routerLink]="" [active]="true">List</a>
+  <a mat-tab-link [routerLink]="['..', 'group']" [active]="false">Group</a>
   <a mat-tab-link [routerLink]="['..', 'heatmap']" [active]="false">Heatmap</a>
 </nav>
 
@@ -66,7 +67,7 @@
         </div>
 
         <div class="icon-cell node-name" [ngStyle]="getColumnOrder('name')">
-          <i class="material-icons cell-icon">desktop_windows</i>
+          <i class="material-icons cell-icon color-icon">desktop_windows</i>
           <a [routerLink]="['..',node.id]" class="cell-text">{{node.id}}</a>
         </div>
 

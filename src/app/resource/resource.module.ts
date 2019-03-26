@@ -16,6 +16,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '../shared.module';
 import { CpuComponent } from './node-heatmap/cpu/cpu.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NodeGroupComponent } from './node-group/node-group.component';
+import { NewGroupComponent } from './new-group/new-group.component';
 
 @NgModule({
   imports: [
@@ -30,8 +32,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     SharedModule,
     ScrollingModule
   ],
-  declarations: [ResourceComponent, NodeListComponent, NodeDetailComponent, NodeHeatmapComponent, NewDiagnosticsComponent, NewCommandComponent, CpuComponent],
-  entryComponents: [NewDiagnosticsComponent, NewCommandComponent],
+  declarations: [ResourceComponent, NodeListComponent, NodeDetailComponent, NodeHeatmapComponent, NewDiagnosticsComponent, NewCommandComponent, CpuComponent, NodeGroupComponent, NewGroupComponent],
+  entryComponents: [NewDiagnosticsComponent, NewCommandComponent, NewGroupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ResourceModule { }

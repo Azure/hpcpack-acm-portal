@@ -37,23 +37,23 @@ mat-header-cell {
 }
 
 .finished {
-  color: #2E7D32;
+  color: #2E7D32 !important;
 }
 
 .queued {
-  color: #FF8F00;
+  color: #FF8F00 !important;
 }
 
 .failed {
-  color: #D84315;
+  color: #D84315 !important;
 }
 
 .running {
-  color: #283593;
+  color: #283593 !important;
 }
 
 .canceled {
-  color: #6c727c;
+  color: #6c727c !important;
 }
 
 .table-progress {
@@ -83,6 +83,7 @@ mat-header-cell {
   height: auto;
   margin-right: .3em;
   text-align: right;
+  color: rgba(0, 0, 0, .7);
 }
 
 .cell-text {
@@ -196,7 +197,8 @@ mat-header-cell {
   @include display-flex(center, center);
 }
 
-.color-icon {
+.color-icon,
+.color-text {
   color: $color;
 }
 
@@ -208,4 +210,8 @@ mat-header-cell {
 .list-item:hover {
   background-color: #eeeeee;
   cursor: pointer;
+}
+
+.flex-vcenter {
+  @include display-flex(center);
 }
