@@ -23,12 +23,18 @@
       <div class="action-text">Run Command...</div>
     </div>
   </button>
+  <button mat-raised-button [disabled]="hasNoSelection()" (click)="manageNodeGroups()">
+    <div class="action-btn">
+      <i class="material-icons btn-icon">category</i>
+      <div class="action-text">Manage Groups...</div>
+    </div>
+  </button>
 </div>
 
 <div class="filter">
   <mat-form-field>
     <input matInput (keyup)="updateUrl()" [(ngModel)]="query.filter" placeholder="Filter">
-    <mat-hint>Filter results by node name, health or state</mat-hint>
+    <mat-hint>Filter results by node name or state</mat-hint>
     <mat-hint align="end">{{dataSource.filteredData.length}} results</mat-hint>
   </mat-form-field>
 </div>
@@ -36,7 +42,8 @@
 <div class="list-container">
   <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}">
     <div class="header node-checkbox">
-      <mat-checkbox color="primary" (change)="$event ? masterToggle() : null" [checked]="selectedNodes.length > 0 && isAllSelected()">
+      <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+        [checked]="selectedNodes.length > 0 && isAllSelected()">
       </mat-checkbox>
     </div>
     <div class="header node-name" [ngStyle]="getColumnOrder('name')">
@@ -48,6 +55,9 @@
     <div class="header node-os" [ngStyle]="getColumnOrder('os')">
       OS
     </div>
+    <div class="header node-groups" [ngStyle]="getColumnOrder('groups')">
+      Groups
+    </div>
     <div class="header node-runningJobCount" [ngStyle]="getColumnOrder('runningJobCount')">
       Jobs
     </div>
@@ -57,12 +67,13 @@
   </div>
 
   <div class="list-content">
-    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content" (scrolledIndexChange)="indexChanged($event)">
-      <div *cdkVirtualFor="let node of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)" class="list-item"
-        (click)="updateSelectedNodes(node)">
+    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content"
+      (scrolledIndexChange)="indexChanged($event)">
+      <div *cdkVirtualFor="let node of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
+        class="list-item" (click)="updateSelectedNodes(node)">
         <div class="icon-cell node-checkbox">
-          <mat-checkbox color="primary" (click)="$event.stopPropagation();" (change)="$event? updateSelectedNodes(node) : null"
-            [checked]="isSelected(node)">
+          <mat-checkbox color="primary" (click)="$event.stopPropagation();"
+            (change)="$event? updateSelectedNodes(node) : null" [checked]="isSelected(node)">
           </mat-checkbox>
         </div>
 
@@ -82,6 +93,11 @@
           <div class="cell-text">{{node.nodeRegistrationInfo.distroInfo}}</div>
         </div>
 
+        <div class="icon-cell node-groups" [ngStyle]="getColumnOrder('groups')">
+          <i class="material-icons cell-icon">category</i>
+          <div class="cell-text">{{groups}}</div>
+        </div>
+
         <div class="icon-cell node-runningJobCount" [ngStyle]="getColumnOrder('runningJobCount')">
           <div class="cell-text">{{node.runningJobCount}}</div>
         </div>
@@ -99,4 +115,22 @@
   </div>
 </div>
 
-<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading"></app-loading-progress-bar>
+<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading">
+</app-loading-progress-bar>
+
+<app-content-window side="right" [title]="windowTitle" width="20" *ngIf="showManageGroups" (showWnd)="onShowWnd($event)"
+  #contentWnd>
+  <ng-template #wndContent>
+    <div class="window-actions">
+      <button mat-flat-button color="primary" class="window-btn">Update</button>
+    </div>
+    <div class="groups" #nodes>
+      <div class="group icon-cell" *ngFor="let group of allGroups" (click)="updateSelectedGroups(group)">
+        <mat-checkbox color="primary" (click)="$event.stopPropagation();"
+          (change)="$event? updateSelectedGroups(group) : null" [checked]="isSelectedGroup(group)">
+          {{group.name}}
+        </mat-checkbox>
+      </div>
+    </div>
+  </ng-template>
+</app-content-window>

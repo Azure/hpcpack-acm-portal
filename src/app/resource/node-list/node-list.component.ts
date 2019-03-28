@@ -10,6 +10,7 @@ import { ApiService, Loop } from '../../services/api.service';
 import { TableService } from '../../services/table/table.service';
 import { VirtualScrollService } from '../../services/virtual-scroll/virtual-scroll.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { ManageGroupsComponent } from '../manage-groups/manage-groups.component';
 
 @Component({
   selector: 'resource-node-list',
@@ -17,6 +18,59 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   styleUrls: ['./node-list.component.scss']
 })
 export class NodeListComponent {
+  // mocked data area
+  public groups = ['HeadNodes', 'ComputeNodes', 'LinuxNodes', 'AzureNodes'];
+  public showManageGroups = false;
+  public windowTitle = "";
+  public selectedGroups = [];
+  public allGroups = [
+    {
+      name: 'HeadNodes',
+      description: 'The head nodes in the cluster',
+      defaultGroup: true
+    },
+    {
+      name: 'ComputeNodes',
+      description: 'The compute nodes in the cluster',
+      defaultGroup: true
+    },
+    {
+      name: 'LinuxNodes',
+      description: 'The linux nodes in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'AzureBatchServicePools',
+      description: 'The Azure batch pools in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'AzureLaasNodes',
+      description: 'The Azure laas Nodes in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'AzureNodes',
+      description: 'Microsoft Azure node instances available in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'UnmanagedServerNodes',
+      description: 'Unmanaged server node instances avalibale in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'WCFBrokerNodes',
+      description: 'The broker nodes in the cluster',
+      defaultGroup: false
+    },
+    {
+      name: 'WorkstationNodes',
+      description: 'The workstations in the cluster',
+      defaultGroup: false
+    }
+  ];
+
   @ViewChild('content') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
   public query = { filter: '' };
@@ -28,6 +82,7 @@ export class NodeListComponent {
   static customizableColumns = [
     { name: 'state', displayed: true, displayName: 'State' },
     { name: 'os', displayed: true, displayName: 'OS' },
+    { name: 'groups', displayed: true, displayName: 'Groups' },
     { name: 'runningJobCount', displayed: true, displayName: 'Jobs' },
     { name: 'memory', displayed: true, displayName: 'Memory(MB)' },
   ];
@@ -151,6 +206,25 @@ export class NodeListComponent {
     }
   }
 
+  public isSelectedGroup(group) {
+    let index = this.selectedGroups.findIndex(n => {
+      return n.name == group.name;
+    });
+    return index == -1 ? false : true;
+  }
+
+  private updateSelectedGroups(group): void {
+    let index = this.selectedGroups.findIndex(n => {
+      return n.name == group.name;
+    });
+    if (index != -1) {
+      this.selectedGroups.splice(index, 1);
+    }
+    else {
+      this.selectedGroups.push(group);
+    }
+  }
+
   runDiagnostics() {
     let dialogRef = this.dialog.open(NewDiagnosticsComponent, {
       width: '60%',
@@ -191,6 +265,33 @@ export class NodeListComponent {
         });
       }
     });
+  }
+
+  manageNodeGroups() {
+    this.showManageGroups = true;
+    this.windowTitle = "Manage Groups";
+    this.selectedGroups = [
+      {
+        name: 'HeadNodes',
+        description: 'The head nodes in the cluster',
+        defaultGroup: true
+      },
+      {
+        name: 'ComputeNodes',
+        description: 'The compute nodes in the cluster',
+        defaultGroup: true
+      },
+      {
+        name: 'LinuxNodes',
+        description: 'The linux nodes in the cluster',
+        defaultGroup: false
+      },
+      {
+        name: 'AzureNodes',
+        description: 'Microsoft Azure node instances available in the cluster',
+        defaultGroup: false
+      }
+    ]
   }
 
   hasNoSelection(): boolean {
@@ -256,5 +357,9 @@ export class NodeListComponent {
 
   get showScrollBar() {
     return this.tableService.isContentScrolled(this.cdkVirtualScrollViewport.elementRef.nativeElement);
+  }
+
+  onShowWnd(condition: boolean) {
+    this.showManageGroups = condition;
   }
 }

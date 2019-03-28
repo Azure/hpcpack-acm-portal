@@ -18,6 +18,7 @@ import { CpuComponent } from './node-heatmap/cpu/cpu.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NodeGroupComponent } from './node-group/node-group.component';
 import { NewGroupComponent } from './new-group/new-group.component';
+import { ManageGroupsComponent } from './manage-groups/manage-groups.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import { NewGroupComponent } from './new-group/new-group.component';
     SharedModule,
     ScrollingModule
   ],
-  declarations: [ResourceComponent, NodeListComponent, NodeDetailComponent, NodeHeatmapComponent, NewDiagnosticsComponent, NewCommandComponent, CpuComponent, NodeGroupComponent, NewGroupComponent],
+  declarations: [ResourceComponent, NodeListComponent, NodeDetailComponent, NodeHeatmapComponent, NewDiagnosticsComponent, NewCommandComponent, CpuComponent, NodeGroupComponent, NewGroupComponent, ManageGroupsComponent],
   entryComponents: [NewDiagnosticsComponent, NewCommandComponent, NewGroupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: true,
-  apiBase: '/v1'
+  apiBase: 'https://hpcpackacm.azurewebsites.net/v1'
 };

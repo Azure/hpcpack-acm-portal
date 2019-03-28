@@ -18,7 +18,8 @@ nav {
   flex: 0.5;
 }
 
-.node-os {
+.node-os,
+.node-groups {
   flex: 2;
 }
 
@@ -65,4 +66,43 @@ nav {
   height: 65vh;
   position: relative;
   width: 100%;
+}
+
+.groups {
+  overflow-y: auto;
+  height: 85vh;
+
+  .group {
+    @include display-flex(center);
+    height: 25px;
+    font-size: 14px;
+
+    .cell-icon {
+      font-size: 1em;
+    }
+
+    .cell-text {
+      padding-left: 10px;
+    }
+
+    &:hover {
+      color: $color;
+      cursor: pointer;
+    }
+  }
+}
+
+.window-btn {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  min-height: 30px;
+  vertical-align: top;
+  font-size: 14px;
+  padding: 0 0;
+  margin: 0;
+}
+
+.window-actions {
+  @include display-flex(center, flex-end);
 }
