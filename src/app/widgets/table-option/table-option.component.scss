@@ -19,21 +19,30 @@
 
 .box {
   flex: 1;
-  border: 2px dashed;
+  border: 1px dashed rgba(0, 0, 0, .5);
   margin: 0 0.5em;
 }
 
 .name {
-  background-color: #4d6bd6;
-  padding: 6px;
-  margin: 6px;
-  border-radius: 6px;
-  color: #ffffff;
+  // background-color: #4d6bd6;
+  padding: 6px 10px;
+  margin: 15px;
+  // border-radius: 6px;
+  // color: #ffffff;
   font-size: 14px;
+  border: 1px solid $color;
+  @include display-flex(center, space-between);
+
+  .mat-icon-button {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    color: $color;
+  }
 }
 
 .name:hover {
-  cursor: pointer;
+  cursor: move;
 }
 
 mat-dialog-actions {
@@ -51,4 +60,13 @@ mat-dialog-actions {
 button {
   margin-right: 10px;
   font-size: 13px;
+}
+
+.name[aria-pressed="true"] {
+  background: $color;
+  color: #fff;
+}
+
+.dragon-active {
+  box-shadow: 0 0 2px #000;
 }
