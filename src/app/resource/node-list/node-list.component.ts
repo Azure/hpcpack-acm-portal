@@ -10,7 +10,7 @@ import { ApiService, Loop } from '../../services/api.service';
 import { TableService } from '../../services/table/table.service';
 import { VirtualScrollService } from '../../services/virtual-scroll/virtual-scroll.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ManageGroupsComponent } from '../manage-groups/manage-groups.component';
+import { NodeGroupComponent } from '../node-group/node-group.component';
 
 @Component({
   selector: 'resource-node-list',
@@ -19,7 +19,7 @@ import { ManageGroupsComponent } from '../manage-groups/manage-groups.component'
 })
 export class NodeListComponent {
   // mocked data area
-  public groups = ['HeadNodes', 'ComputeNodes', 'LinuxNodes', 'AzureNodes'];
+  // public groups = ['HeadNodes', 'ComputeNodes', 'LinuxNodes', 'AzureNodes'];
   public showManageGroups = false;
   public windowTitle = "";
   public selectedGroups = [];
@@ -73,7 +73,7 @@ export class NodeListComponent {
 
   @ViewChild('content') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
-  public query = { filter: '' };
+  public query = { filter: '', keyword: '' };
 
   private subcription: Subscription;
 
@@ -88,8 +88,8 @@ export class NodeListComponent {
   ];
 
   private availableColumns;
-
   public displayedColumns;
+  public filterColumns;
 
   private selection = new SelectionModel(true, []);
 
@@ -100,7 +100,6 @@ export class NodeListComponent {
   public loadFinished = false;
   private interval = 5000;
   private reverse = true;
-  private scrollDirection = 'down';
   public selectedNodes = [];
 
   pivot = Math.round(this.maxPageSize / 2) - 1;
@@ -122,14 +121,27 @@ export class NodeListComponent {
   ) { }
 
   ngOnInit() {
+    this.dataSource.filterPredicate = this.filterPredicate;
     this.loadSettings();
     this.getDisplayedColumns();
+    this.getFilterColumns();
     this.nodeLoop = Loop.start(
       this.getNodesRequest(),
       {
         next: (result) => {
           this.empty = false;
           if (result.length > 0) {
+            result.forEach(element => {
+              element['groups'] = ['HeadNodes', 'ComputeNodes', 'AzureNodes'];//need to be deleted later.
+              if (element.id.indexOf('linux') > 0) {
+                element['groups'].push('LinuxNodes');
+              }
+              else {
+                element['groups'].push('WindowsNodes');
+              }
+              element['os'] = element.nodeRegistrationInfo.distroInfo;
+              element['memory'] = element.nodeRegistrationInfo.memoryMegabytes;
+            });
             this.tableService.updateDatasource(result, this.dataSource, 'id');
             if (this.endId != -1 && result[result.length - 1].id != this.endId) {
               this.loading = false;
@@ -145,6 +157,7 @@ export class NodeListComponent {
     );
     this.subcription = this.route.queryParamMap.subscribe(params => {
       this.query.filter = params.get('filter');
+      this.query.keyword = params.get('keyword');
       this.updateUI();
     });
   }
@@ -160,12 +173,25 @@ export class NodeListComponent {
   }
 
   updateUI() {
-    let filter = this.query.filter;
-    this.dataSource.filter = filter;
+    this.dataSource.filter = this.query.keyword;
   }
 
   updateUrl() {
+    console.log(this.query);
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: this.query });
+  }
+
+
+  filterPredicate = (data, filter) => {
+    let content = "";
+    if (!this.query.filter) {
+      content = JSON.stringify(data).toLowerCase();
+    }
+    else {
+      content = data[this.query.filter].toString().toLowerCase();
+    }
+    filter = filter.trim().toLowerCase();
+    return !filter || content.indexOf(filter) !== -1;
   }
 
   public isAllSelected() {
@@ -268,30 +294,14 @@ export class NodeListComponent {
   }
 
   manageNodeGroups() {
-    this.showManageGroups = true;
-    this.windowTitle = "Manage Groups";
-    this.selectedGroups = [
-      {
-        name: 'HeadNodes',
-        description: 'The head nodes in the cluster',
-        defaultGroup: true
-      },
-      {
-        name: 'ComputeNodes',
-        description: 'The compute nodes in the cluster',
-        defaultGroup: true
-      },
-      {
-        name: 'LinuxNodes',
-        description: 'The linux nodes in the cluster',
-        defaultGroup: false
-      },
-      {
-        name: 'AzureNodes',
-        description: 'Microsoft Azure node instances available in the cluster',
-        defaultGroup: false
-      }
-    ]
+    let dialogRef = this.dialog.open(NodeGroupComponent, {
+      width: '60%',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(params => {
+
+    });
   }
 
   hasNoSelection(): boolean {
@@ -303,15 +313,26 @@ export class NodeListComponent {
     this.displayedColumns = ['select', 'name'].concat(columns);
   }
 
+  getFilterColumns(): void {
+    this.filterColumns = [{ name: '-- All --', value: '' }];
+    this.displayedColumns.forEach((item, index) => {
+      if (index > 0) {
+        this.filterColumns.push({ name: item, value: item });
+      }
+    });
+  }
+
   customizeTable(): void {
     let dialogRef = this.dialog.open(TableOptionComponent, {
       width: '60%',
-      data: { columns: this.availableColumns }
+      data: { columns: this.availableColumns },
+      ariaLabel: 'Customize resource list columns'
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.availableColumns = res.columns;
         this.getDisplayedColumns();
+        this.getFilterColumns();
         this.saveSettings();
       }
     });

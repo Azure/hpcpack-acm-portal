@@ -4,7 +4,6 @@ import { ResourceComponent } from './resource.component';
 import { NodeListComponent } from './node-list/node-list.component';
 import { NodeHeatmapComponent } from './node-heatmap/node-heatmap.component';
 import { NodeDetailComponent } from './node-detail/node-detail.component';
-import { NodeGroupComponent } from './node-group/node-group.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,7 +11,6 @@ const routes: Routes = [{
   children: [
     { path: 'list', component: NodeListComponent, data: { breadcrumb: "List" } },
     { path: 'heatmap', component: NodeHeatmapComponent, data: { breadcrumb: "Heatmap" } },
-    { path: 'group', component: NodeGroupComponent, data: { breadcrumb: "Group" } },
     { path: ':id', component: NodeDetailComponent, data: { breadcrumb: "Node" } },
     { path: '', redirectTo: 'list', pathMatch: 'full' },
   ],

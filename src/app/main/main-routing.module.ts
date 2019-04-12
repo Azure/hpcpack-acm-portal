@@ -17,6 +17,11 @@ const routes: Routes = [{
             data: { breadcrumb: "Resource" }
         },
         {
+            path: 'groups',
+            loadChildren: 'app/groups/groups.module#GroupsModule',
+            data: { breadcrumb: "Groups" }
+        },
+        {
             path: 'diagnostics',
             loadChildren: 'app/diagnostics/diagnostics.module#DiagnosticsModule',
             data: { breadcrumb: "Diagnostics" }

@@ -1,57 +1,44 @@
 @import "../../stylesheets/mixin.scss";
-@import "../../stylesheets/table.scss";
 
-nav {
-  margin-bottom: 1em;
+.groups {
+  padding: 15px 10px;
 }
 
-.group-name {
-  flex: 2;
-}
+.group {
+  @include display-flex(center);
+  height: 30px;
 
-.group-description {
-  flex: 4;
-}
-
-.group-actions {
-  flex: 1
-}
-
-.delete-icon {
-  color: rgba($color: #000000, $alpha: 0.5)
-}
-
-.group-name {
   &:hover {
+    color: $color;
     cursor: pointer;
   }
 
-  .cell-text {
-    text-decoration-color: $color;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
+  .group-name {
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .group-description {
+    padding-left: 10px;
+    display: inline-block;
+    @include ellipsis-text;
   }
 }
 
-.nodes {
-  overflow-y: auto;
-  height: 85vh;
+mat-dialog-actions {
+  justify-content: flex-end;
+}
 
-  .node {
+button {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.actions {
+  @include display-flex(center, flex-end);
+
+  .action-btn {
     @include display-flex(center);
-    height: 25px;
-    font-size: 14px;
-
-    .cell-icon {
-      font-size: 1em;
-    }
-
-    &:hover {
-      color: $color;
-    }
   }
-}
 
-.edit-input {
-  width: 100%;
 }

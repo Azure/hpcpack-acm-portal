@@ -68,30 +68,6 @@ nav {
   width: 100%;
 }
 
-.groups {
-  overflow-y: auto;
-  height: 85vh;
-
-  .group {
-    @include display-flex(center);
-    height: 25px;
-    font-size: 14px;
-
-    .cell-icon {
-      font-size: 1em;
-    }
-
-    .cell-text {
-      padding-left: 10px;
-    }
-
-    &:hover {
-      color: $color;
-      cursor: pointer;
-    }
-  }
-}
-
 .window-btn {
   width: 30px;
   height: 30px;
@@ -105,4 +81,21 @@ nav {
 
 .window-actions {
   @include display-flex(center, flex-end);
+}
+
+.filter {
+  @include display-flex(center);
+
+
+  mat-form-field:first-child {
+    width: 150px;
+  }
+
+  mat-form-field:last-child {
+    flex: 1;
+  }
+
+  &>mat-form-field {
+    margin: 0 10px;
+  }
 }

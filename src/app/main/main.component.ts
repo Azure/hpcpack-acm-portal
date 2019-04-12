@@ -23,6 +23,11 @@ export class MainComponent {
             icon: 'cloud',
         },
         {
+            link: '/groups',
+            title: 'Groups',
+            icon: 'category',
+        },
+        {
             link: '/diagnostics',
             title: 'Diagnostics',
             icon: 'local_hospital',

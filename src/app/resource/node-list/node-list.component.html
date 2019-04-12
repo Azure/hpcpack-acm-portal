@@ -1,6 +1,5 @@
 <nav mat-tab-nav-bar>
   <a mat-tab-link [routerLink]="" [active]="true">List</a>
-  <a mat-tab-link [routerLink]="['..', 'group']" [active]="false">Group</a>
   <a mat-tab-link [routerLink]="['..', 'heatmap']" [active]="false">Heatmap</a>
 </nav>
 
@@ -26,15 +25,22 @@
   <button mat-raised-button [disabled]="hasNoSelection()" (click)="manageNodeGroups()">
     <div class="action-btn">
       <i class="material-icons btn-icon">category</i>
-      <div class="action-text">Manage Groups...</div>
+      <div class="action-text">Groups...</div>
     </div>
   </button>
 </div>
 
 <div class="filter">
   <mat-form-field>
-    <input matInput (keyup)="updateUrl()" [(ngModel)]="query.filter" placeholder="Filter">
-    <mat-hint>Filter results by node name or state</mat-hint>
+    <mat-label>Filter field</mat-label>
+    <mat-select [(ngModel)]="query.filter" (selectionChange)="updateUrl()">
+      <mat-option *ngFor="let field of filterColumns" [value]="field.value">
+        {{field.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput (keyup)="updateUrl()" [(ngModel)]="query.keyword" placeholder="keyword">
     <mat-hint align="end">{{dataSource.filteredData.length}} results</mat-hint>
   </mat-form-field>
 </div>
@@ -95,7 +101,7 @@
 
         <div class="icon-cell node-groups" [ngStyle]="getColumnOrder('groups')">
           <i class="material-icons cell-icon">category</i>
-          <div class="cell-text">{{groups}}</div>
+          <div class="cell-text">{{node.groups}}</div>
         </div>
 
         <div class="icon-cell node-runningJobCount" [ngStyle]="getColumnOrder('runningJobCount')">
@@ -117,20 +123,3 @@
 
 <app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading">
 </app-loading-progress-bar>
-
-<app-content-window side="right" [title]="windowTitle" width="20" *ngIf="showManageGroups" (showWnd)="onShowWnd($event)"
-  #contentWnd>
-  <ng-template #wndContent>
-    <div class="window-actions">
-      <button mat-flat-button color="primary" class="window-btn">Update</button>
-    </div>
-    <div class="groups" #nodes>
-      <div class="group icon-cell" *ngFor="let group of allGroups" (click)="updateSelectedGroups(group)">
-        <mat-checkbox color="primary" (click)="$event.stopPropagation();"
-          (change)="$event? updateSelectedGroups(group) : null" [checked]="isSelectedGroup(group)">
-          {{group.name}}
-        </mat-checkbox>
-      </div>
-    </div>
-  </ng-template>
-</app-content-window>
