@@ -1,0 +1,20 @@
+pool:
+  name: Hosted Ubuntu 1604
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 8.x'
+  inputs:
+    versionSpec: 8.x
+    checkLatest: true
+
+- script: |
+   npm install
+   npm install -g @angular/cli
+   ng build --prod
+  displayName: 'Command Line Script'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Portal'
+  inputs:
+    PathtoPublish: dist
+    ArtifactName: dist
