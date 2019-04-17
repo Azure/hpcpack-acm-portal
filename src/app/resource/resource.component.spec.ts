@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 @Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent { }
 
-fdescribe('ResourceComponent', () => {
+describe('ResourceComponent', () => {
   let component: ResourceComponent;
   let fixture: ComponentFixture<ResourceComponent>;
 

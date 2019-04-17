@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { JobStateService } from './job-state.service';
 
-fdescribe('JobStateService', () => {
+describe('JobStateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [JobStateService]

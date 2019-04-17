@@ -1,7 +1,7 @@
 import { of } from 'rxjs/observable/of';
 import { AuthService } from './auth.service';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let apiServiceSpy;
   let authService: AuthService;
   let userServiceSpy;

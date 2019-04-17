@@ -18,7 +18,7 @@ let customizableColumns = [
   { name: 'memory', displayName: 'Memory', displayed: false },
 ];
 
-fdescribe('TableOptionComponent', () => {
+describe('TableOptionComponent', () => {
   let component: TableOptionComponent;
   let fixture: ComponentFixture<TableOptionComponent>;
 

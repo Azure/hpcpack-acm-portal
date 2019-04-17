@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PerformanceComponent } from './performance.component';
 import { ChartModule } from 'angular2-chartjs';
 
-fdescribe('PerformanceComponent', () => {
+describe('PerformanceComponent', () => {
   let component: PerformanceComponent;
   let fixture: ComponentFixture<PerformanceComponent>;
 

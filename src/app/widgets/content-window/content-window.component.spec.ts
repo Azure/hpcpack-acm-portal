@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentWindowComponent } from './content-window.component';
 
-fdescribe('ContentWindowComponent', () => {
+describe('ContentWindowComponent', () => {
   let component: ContentWindowComponent;
   let fixture: ComponentFixture<ContentWindowComponent>;
 

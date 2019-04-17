@@ -72,7 +72,7 @@ function finishInit(fixture: ComponentFixture<any>) {
   fixture.detectChanges();
 }
 
-fdescribe('ClusrunResultListComponent', () => {
+describe('ClusrunResultListComponent', () => {
   let component: ResultListComponent;
   let fixture: ComponentFixture<ResultListComponent>;
   let viewport: CdkVirtualScrollViewport;

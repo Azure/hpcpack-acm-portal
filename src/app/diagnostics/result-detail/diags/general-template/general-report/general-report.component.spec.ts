@@ -116,7 +116,7 @@ class DiagReportServiceStub {
   }
 }
 
-fdescribe('GeneralReportComponent', () => {
+describe('GeneralReportComponent', () => {
   let component: GeneralReportComponent;
   let fixture: ComponentFixture<GeneralReportComponent>;
 

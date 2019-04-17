@@ -19,7 +19,7 @@ class RouterLinkDirectiveStub {
   }
 }
 
-fdescribe('GoodNodesComponent', () => {
+describe('GoodNodesComponent', () => {
   let component: GoodNodesComponent;
   let fixture: ComponentFixture<GoodNodesComponent>;
 

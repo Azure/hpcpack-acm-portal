@@ -104,7 +104,7 @@ class TableServiceStub {
   }
 }
 
-fdescribe('MultiCmdsComponent', () => {
+describe('MultiCmdsComponent', () => {
   let component: MultiCmdsComponent;
   let fixture: ComponentFixture<MultiCmdsComponent>;
 

@@ -39,7 +39,7 @@ class CpuComponent {
 }
 
 
-fdescribe('NodeHeatmapComponent', () => {
+describe('NodeHeatmapComponent', () => {
   let component: NodeHeatmapComponent;
   let fixture: ComponentFixture<NodeHeatmapComponent>;
 

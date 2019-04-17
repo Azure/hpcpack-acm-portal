@@ -42,7 +42,7 @@ class ApiServiceStub {
 const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 const activatedRouteSpy = jasmine.createSpyObj('ActivatedRoute', ['']);
 
-fdescribe('DashboardComponent', () => {
+describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 

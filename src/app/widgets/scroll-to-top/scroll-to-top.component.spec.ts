@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ScrollToTopComponent } from './scroll-to-top.component';
 import { MaterialsModule } from '../../materials.module';
 
-fdescribe('ScrollToTopComponent', () => {
+describe('ScrollToTopComponent', () => {
   let component: ScrollToTopComponent;
   let fixture: ComponentFixture<ScrollToTopComponent>;
 

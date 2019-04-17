@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { LocalStorageService } from './local-storage.service';
 
-fdescribe('LocalStorageService', () => {
+describe('LocalStorageService', () => {
   let localStorageService: LocalStorageService;
   beforeEach(() => {
     localStorageService = new LocalStorageService();

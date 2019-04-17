@@ -28,7 +28,7 @@ class TableServiceStub {
   }
 }
 
-fdescribe('NodeSelectorComponent', () => {
+describe('NodeSelectorComponent', () => {
   let component: NodeSelectorComponent;
   let fixture: ComponentFixture<NodeSelectorComponent>;
   let viewport: CdkVirtualScrollViewport;

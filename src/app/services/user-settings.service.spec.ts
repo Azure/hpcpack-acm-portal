@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { UserSettingsService } from './user-settings.service';
 
-fdescribe('UserSettingsService', () => {
+describe('UserSettingsService', () => {
   let userSettings: UserSettingsService;
   let storageSpy;
   beforeEach(() => {

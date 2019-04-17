@@ -4,7 +4,7 @@ import { CommandOutputComponent } from './command-output.component';
 import { MaterialsModule } from '../../materials.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('CommandOutputComponent', () => {
+describe('CommandOutputComponent', () => {
   let component: CommandOutputComponent;
   let fixture: ComponentFixture<CommandOutputComponent>;
 

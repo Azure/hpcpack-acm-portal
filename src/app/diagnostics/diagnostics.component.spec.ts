@@ -5,7 +5,7 @@ import { DiagnosticsComponent } from './diagnostics.component';
 @Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent { }
 
-fdescribe('DiagnosticsComponent', () => {
+describe('DiagnosticsComponent', () => {
   let component: DiagnosticsComponent;
   let fixture: ComponentFixture<DiagnosticsComponent>;
 
