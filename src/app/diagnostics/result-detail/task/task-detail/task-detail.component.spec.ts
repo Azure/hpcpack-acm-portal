@@ -17,7 +17,7 @@ class ApiServiceStub {
   }
 }
 
-fdescribe('TaskDetailComponent', () => {
+describe('TaskDetailComponent', () => {
   let component: TaskDetailComponent;
   let fixture: ComponentFixture<TaskDetailComponent>;
 

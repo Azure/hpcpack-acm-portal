@@ -144,7 +144,7 @@ export class ActivatedRouteStub {
   };
 }
 
-fdescribe('NodeDetailComponent', () => {
+describe('NodeDetailComponent', () => {
   let component: NodeDetailComponent;
   let fixture: ComponentFixture<NodeDetailComponent>;
   let activatedRoute = new ActivatedRouteStub({ id: 'testNode' });

@@ -27,7 +27,7 @@ const routerStub = {
 
 const activatedRouteStub = {}
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 

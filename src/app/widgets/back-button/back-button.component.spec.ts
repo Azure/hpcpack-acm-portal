@@ -9,7 +9,7 @@ const locationStub = {
   back: jasmine.createSpy('back')
 }
 
-fdescribe('BackButtonComponent', () => {
+describe('BackButtonComponent', () => {
   let component: BackButtonComponent;
   let fixture: ComponentFixture<BackButtonComponent>;
 

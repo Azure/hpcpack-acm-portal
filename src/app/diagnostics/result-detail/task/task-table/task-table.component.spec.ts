@@ -25,7 +25,7 @@ class JobStateServiceStub {
   }
 }
 
-fdescribe('TaskTableComponent', () => {
+describe('TaskTableComponent', () => {
   let component: TaskTableComponent;
   let fixture: ComponentFixture<TaskTableComponent>;
   let viewport: CdkVirtualScrollViewport;

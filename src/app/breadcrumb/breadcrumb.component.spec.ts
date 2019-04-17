@@ -26,7 +26,7 @@ class RouterLinkDirectiveStub {
   }
 }
 
-fdescribe('BreadcrumbComponent', () => {
+describe('BreadcrumbComponent', () => {
   let component: BreadcrumbComponent;
   let fixture: ComponentFixture<BreadcrumbComponent>;
 

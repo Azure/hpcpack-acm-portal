@@ -9,7 +9,7 @@ class MatDialogModuleMock {
   public close() { }
 }
 
-fdescribe('TaskErrorComponent', () => {
+describe('TaskErrorComponent', () => {
   let component: TaskErrorComponent;
   let fixture: ComponentFixture<TaskErrorComponent>;
 

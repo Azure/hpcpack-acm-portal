@@ -135,7 +135,7 @@ class DiagReportServiceStub {
   }
 }
 
-fdescribe('PingPongReportComponent', () => {
+describe('PingPongReportComponent', () => {
   let component: PingPongReportComponent;
   let fixture: ComponentFixture<PingPongReportComponent>;
 

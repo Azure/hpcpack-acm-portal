@@ -16,7 +16,7 @@ class RouterLinkDirectiveStub {
   }
 }
 
-fdescribe('NodesInfoComponent', () => {
+describe('NodesInfoComponent', () => {
   let component: NodesInfoComponent;
   let fixture: ComponentFixture<NodesInfoComponent>;
 

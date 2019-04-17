@@ -49,7 +49,7 @@ const routerStub = {
 
 const activatedRouteStub  = {}
 
-fdescribe('MainComponent', () => {
+describe('MainComponent', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
 

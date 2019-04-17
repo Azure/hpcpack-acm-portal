@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialsModule } from '../../materials.module';
 import { EventListComponent } from './event-list.component';
 
-fdescribe('EventListComponent', () => {
+describe('EventListComponent', () => {
   let component: EventListComponent;
   let fixture: ComponentFixture<EventListComponent>;
 

@@ -122,7 +122,7 @@ const routerStub = {
 })
 class TestModule { }
 
-fdescribe('DiagResultDetailComponent', () => {
+describe('DiagResultDetailComponent', () => {
   let component: ResultDetailComponent;
   let fixture: ComponentFixture<ResultDetailComponent>;
   let activatedRoute = new ActivatedRouteStub({ id: 133 });

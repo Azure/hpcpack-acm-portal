@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ScheduledEventsComponent } from './scheduled-events.component';
 import { MaterialsModule } from '../../materials.module';
 
-fdescribe('ScheduledEventsComponent', () => {
+describe('ScheduledEventsComponent', () => {
   let component: ScheduledEventsComponent;
   let fixture: ComponentFixture<ScheduledEventsComponent>;
 

@@ -6,7 +6,7 @@ import { CommandComponent } from './command.component';
 @Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent {}
 
-fdescribe('CommandComponent', () => {
+describe('CommandComponent', () => {
   let component: CommandComponent;
   let fixture: ComponentFixture<CommandComponent>;
 

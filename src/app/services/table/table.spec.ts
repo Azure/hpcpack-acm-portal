@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { TableService } from './table.service';
 
-fdescribe('TableDataService', () => {
+describe('TableDataService', () => {
   let userSettingsServiceSpy;
   let tableService: TableService;
   beforeEach(() => {

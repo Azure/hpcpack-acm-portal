@@ -5,8 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check --poll 2000",
-    "build": "ng build --prod",
+    "build": "ng build --prod --aot",
     "test": "ng test --source-map --poll 2000",
+    "test-single-headless": "ng test --watch=false --reporters=progress,junit",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -37,9 +38,9 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.6",
+    "@angular-devkit/build-angular": "^0.13.8",
     "@angular/cli": "7.1.1",
-    "@angular/compiler-cli": "^7.2.10",
+    "@angular/compiler-cli": "^7.2.13",
     "@angular/language-service": "7.1.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
@@ -47,11 +48,12 @@
     "codelyzer": "^4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^4.0.1",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-junit-reporter": "^1.2.0",
     "protractor": "^5.4.2",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

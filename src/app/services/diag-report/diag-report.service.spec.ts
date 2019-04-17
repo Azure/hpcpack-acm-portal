@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { DiagReportService } from './diag-report.service';
 import { identifierModuleUrl } from '@angular/compiler';
 
-fdescribe('DiagReportService', () => {
+describe('DiagReportService', () => {
   let diagReportService: DiagReportService;
   beforeEach(() => {
     diagReportService = new DiagReportService();

@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-fdescribe('Resource', () => {
+describe('Resource', () => {
   class TestResource extends Resource<any> {
     protected get url(): string {
       return '';
@@ -58,7 +58,7 @@ fdescribe('Resource', () => {
   });
 });
 
-fdescribe('CommandApi', () => {
+describe('CommandApi', () => {
   let httpSpy;
   let resource;
 
@@ -117,7 +117,7 @@ fdescribe('CommandApi', () => {
   }));
 });
 
-fdescribe('ApiService', () => {
+describe('ApiService', () => {
   let apiService;
 
   beforeEach(() => {
@@ -140,7 +140,7 @@ fdescribe('ApiService', () => {
   });
 });
 
-fdescribe('Loop', () => {
+describe('Loop', () => {
   it('should call next once and stop', fakeAsync(() => {
     let spy = jasmine.createSpyObj('observer', ['next', 'error']);
     spy.next.and.returnValue(undefined);
