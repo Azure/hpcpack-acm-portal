@@ -7,7 +7,7 @@
     "start": "ng serve --host 0.0.0.0 --disable-host-check --poll 2000",
     "build": "ng build --prod --aot",
     "test": "ng test --source-map --poll 2000",
-    "test-single-headless": "ng test --watch=false --reporters=progress,junit",
+    "test-single-headless": "ng test --watch=false --code-coverage --reporters=progress,junit",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
