@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import DragonDrop from 'drag-on-drop';
 
 @Component({
@@ -16,8 +16,6 @@ export class TableOptionComponent implements OnInit {
   public selected: any[];
   public dragonOptions;
   public dragonSeletced;
-
-  public dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   constructor(
     public dialogRef: MatDialogRef<TableOptionComponent>,

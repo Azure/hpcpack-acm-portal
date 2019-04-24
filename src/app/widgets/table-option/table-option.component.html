@@ -32,6 +32,34 @@
         </div>
       </div>
     </div>
+  </div> -->
+  <p id="options-help" [hidden]="true">Options help</p>
+  <p id="selected-help" [hidden]="true">Selected help</p>
+  <div class="content">
+    <div class='column'>
+      <div class="label" id="options">Options</div>
+      <div class='box' #optionsEle aria-describedby="options-help" aria-labelledby="options" tabindex="0">
+        <div *ngFor='let item of options' class="name option-item">
+          <div class="displayName" aria-labelledby="options" aria-describedby="item.displayName"> {{item.displayName}}
+          </div>
+          <button mat-icon-button (click)="addColumn($event,item)">
+            <mat-icon aria-label="Add column button">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='column'>
+      <div class="label" id="selected">Selected</div>
+      <div class='box' #selectedEle aria-labelledby="selected" aria-describedby="selected-help" tabindex="0">
+        <div *ngFor='let item of selected' class="name selected-item">
+          <div class="displayName" aria-labelledby="selected" aria-describedby="item.displayName">{{item.displayName}}
+          </div>
+          <button mat-icon-button (click)="removeColumn($event,item)">
+            <mat-icon aria-label="Remove column button">clear</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
