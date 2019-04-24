@@ -4,6 +4,7 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 import { TableService } from '../../services/table/table.service';
 import { NewGroupComponent } from '../new-group/new-group.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ConfirmDialogComponent } from '../../widgets/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-group-list',
@@ -106,7 +107,7 @@ export class GroupListComponent implements OnInit {
   }
 
   trackByFn(index, item) {
-    return this.tableDataService.trackByFn(item, this.displayedColumns);
+    return item.name + item.description;
   }
 
 
@@ -144,10 +145,30 @@ export class GroupListComponent implements OnInit {
     this.selectedGroupName = group.name;
     this.editGroup['name'] = group.name;
     this.editGroup['description'] = group.description;
+    this.editGroup['defaultGroup'] = group.defaultGroup;
   }
 
-  saveEdit() {
+  delete(i: number, groupName: string) {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '45%',
+      data: {
+        title: 'Delete Group',
+        message: `Are you sure to delete group ${groupName}?`
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.dataSource.data.splice(i, 1);
+        this.dataSource._updateChangeSubscription();
+      }
+    });
+  }
+
+  saveEdit(i: number) {
     this.selectedGroupName = '';
+    this.dataSource.data[i] = this.editGroup;
+    this.dataSource._updateChangeSubscription();
+    this.editGroup = {};
   }
 
   cancelEdit() {

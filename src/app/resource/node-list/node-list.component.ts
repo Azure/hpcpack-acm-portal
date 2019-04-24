@@ -18,59 +18,6 @@ import { NodeGroupComponent } from '../node-group/node-group.component';
   styleUrls: ['./node-list.component.scss']
 })
 export class NodeListComponent {
-  // mocked data area
-  // public groups = ['HeadNodes', 'ComputeNodes', 'LinuxNodes', 'AzureNodes'];
-  public showManageGroups = false;
-  public windowTitle = "";
-  public selectedGroups = [];
-  public allGroups = [
-    {
-      name: 'HeadNodes',
-      description: 'The head nodes in the cluster',
-      defaultGroup: true
-    },
-    {
-      name: 'ComputeNodes',
-      description: 'The compute nodes in the cluster',
-      defaultGroup: true
-    },
-    {
-      name: 'LinuxNodes',
-      description: 'The linux nodes in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'AzureBatchServicePools',
-      description: 'The Azure batch pools in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'AzureLaasNodes',
-      description: 'The Azure laas Nodes in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'AzureNodes',
-      description: 'Microsoft Azure node instances available in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'UnmanagedServerNodes',
-      description: 'Unmanaged server node instances avalibale in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'WCFBrokerNodes',
-      description: 'The broker nodes in the cluster',
-      defaultGroup: false
-    },
-    {
-      name: 'WorkstationNodes',
-      description: 'The workstations in the cluster',
-      defaultGroup: false
-    }
-  ];
-
   @ViewChild('content') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
   public query = { filter: '', keyword: '' };
@@ -98,7 +45,7 @@ export class NodeListComponent {
   public maxPageSize = 30000;
   public scrolled = false;
   public loadFinished = false;
-  private interval = 5000;
+  private interval = 5000000;
   private reverse = true;
   public selectedNodes = [];
 
@@ -177,7 +124,6 @@ export class NodeListComponent {
   }
 
   updateUrl() {
-    console.log(this.query);
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: this.query });
   }
 
@@ -232,24 +178,6 @@ export class NodeListComponent {
     }
   }
 
-  public isSelectedGroup(group) {
-    let index = this.selectedGroups.findIndex(n => {
-      return n.name == group.name;
-    });
-    return index == -1 ? false : true;
-  }
-
-  private updateSelectedGroups(group): void {
-    let index = this.selectedGroups.findIndex(n => {
-      return n.name == group.name;
-    });
-    if (index != -1) {
-      this.selectedGroups.splice(index, 1);
-    }
-    else {
-      this.selectedGroups.push(group);
-    }
-  }
 
   runDiagnostics() {
     let dialogRef = this.dialog.open(NewDiagnosticsComponent, {
@@ -300,7 +228,25 @@ export class NodeListComponent {
     });
 
     dialogRef.afterClosed().subscribe(params => {
-
+      if (params.isNewGroup) {
+        //send request to update selected nodes' groups info
+        //using selectedNode and newGroup
+        //now just make interval extreamly large to not update mocked data
+        this.selectedNodes.forEach(ele => {
+          let index = this.dataSource.data.findIndex(data => {
+            return data.id == ele.id;
+          })
+          this.dataSource.data[index]['groups'].push(params.newGroup.name);
+        });
+        this.dataSource._updateChangeSubscription();
+      }
+      else {
+        this.selectedNodes.forEach(ele => {
+          ele['groups'] = params.selectedGroups.map(ele => {
+            return ele.name;
+          });
+        });
+      }
     });
   }
 
@@ -378,9 +324,5 @@ export class NodeListComponent {
 
   get showScrollBar() {
     return this.tableService.isContentScrolled(this.cdkVirtualScrollViewport.elementRef.nativeElement);
-  }
-
-  onShowWnd(condition: boolean) {
-    this.showManageGroups = condition;
   }
 }

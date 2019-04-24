@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-node-group',
@@ -81,11 +81,22 @@ export class NodeGroupComponent implements OnInit {
       defaultGroup: false
     }
   ];
+
+  public dataSource: MatTableDataSource<any> = new MatTableDataSource();
+  public isNewGroup: boolean = false;
+  public newGroup = {
+    name: '',
+    description: '',
+    defaultGroup: false
+  };
+
+
   constructor(
-    public dialog: MatDialogRef<NodeGroupComponent>
+    public dialogRef: MatDialogRef<NodeGroupComponent>
   ) { }
 
   ngOnInit() {
+    this.dataSource.data = this.allGroups;
   }
 
 
@@ -108,7 +119,20 @@ export class NodeGroupComponent implements OnInit {
     }
   }
 
-  public newGroup() {
-    console.log("To be done.");
+  public createGroup() {
+    this.isNewGroup = true;
+  }
+
+  public backToList() {
+    this.isNewGroup = false;
+  }
+
+  public updateList(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
+  close(){
+    let params = { isNewGroup: this.isNewGroup, newGroup: this.newGroup, selectedGroups: this.selectedGroups};
+    this.dialogRef.close(params);
   }
 }
