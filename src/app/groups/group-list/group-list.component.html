@@ -30,10 +30,12 @@
 
   <div class="list-content">
     <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content">
-      <div *cdkVirtualFor="let group of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)" class="list-item">
+      <div *cdkVirtualFor="let group of dataSource; let i = index; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
+        class="list-item">
         <div class="icon-cell group-name" [ngClass]="{'active-job': selectedGroup == group.name}">
           <i class="material-icons cell-icon color-icon">category</i>
-          <div class="cell-text color-text" *ngIf="selectedGroupName !== group.name" (click)="getNodes(group.name)">{{group.name}}</div>
+          <div class="cell-text color-text" *ngIf="selectedGroupName !== group.name" (click)="getNodes(group.name)">
+            {{group.name}}</div>
           <mat-form-field *ngIf="selectedGroupName == group.name" class="edit-input">
             <input matInput [(ngModel)]="editGroup.name">
           </mat-form-field>
@@ -51,11 +53,11 @@
           <div class="flex-vcenter" *ngIf="group.defaultGroup"> - </div>
           <div class="flex-vcenter" *ngIf="!group.defaultGroup && !(selectedGroupName == group.name)">
             <i class="material-icons cell-icon color-icon" (click)="edit(group)">edit</i>
-            <i class="material-icons cell-icon delete-icon">delete</i>
+            <i class="material-icons cell-icon delete-icon" (click)="delete(i, group.name)">delete</i>
           </div>
           <div class="flex-vcenter" *ngIf="selectedGroupName == group.name">
-            <i class="material-icons cell-icon color-icon" (click)="saveEdit()">cached</i>
-              <i class="material-icons cell-icon delete-icon" (click)="cancelEdit()">close</i>
+            <i class="material-icons cell-icon color-icon" (click)="saveEdit(i)">cached</i>
+            <i class="material-icons cell-icon delete-icon" (click)="cancelEdit()">close</i>
           </div>
         </div>
       </div>

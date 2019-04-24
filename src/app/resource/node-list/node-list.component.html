@@ -45,8 +45,8 @@
   </mat-form-field>
 </div>
 
-<div class="list-container">
-  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}">
+<div class="list-container" role="grid">
+  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}" role="rowheader">
     <div class="header node-checkbox">
       <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
         [checked]="selectedNodes.length > 0 && isAllSelected()">
@@ -72,11 +72,11 @@
     </div>
   </div>
 
-  <div class="list-content">
+  <div class="list-content" role="rowgroup">
     <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content"
       (scrolledIndexChange)="indexChanged($event)">
       <div *cdkVirtualFor="let node of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
-        class="list-item" (click)="updateSelectedNodes(node)">
+        class="list-item" (click)="updateSelectedNodes(node)" tabindex="0">
         <div class="icon-cell node-checkbox">
           <mat-checkbox color="primary" (click)="$event.stopPropagation();"
             (change)="$event? updateSelectedNodes(node) : null" [checked]="isSelected(node)">

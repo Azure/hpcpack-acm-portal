@@ -1,7 +1,10 @@
 @import "../../stylesheets/mixin.scss";
 
 .groups {
+  margin: 10px;
   padding: 15px 10px;
+  max-height: 400px;
+  overflow: auto;
 }
 
 .group {
@@ -41,4 +44,9 @@ button {
     @include display-flex(center);
   }
 
+}
+
+.filter,
+.new-group {
+  width: 100%;
 }
