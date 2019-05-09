@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { TableOptionComponent } from '../../../../widgets/table-option/table-option.component';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, SimpleChanges, OnDestroy } from '@angular/core';
+import { TableOptionComponent } from '../../../../widgets/virtual-scroll-table/table-option/table-option.component';
 import { MatDialog } from '@angular/material';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { JobStateService } from '../../../../services/job-state/job-state.service';
@@ -12,7 +12,7 @@ import { VirtualScrollService } from '../../../../services/virtual-scroll/virtua
   templateUrl: './task-table.component.html',
   styleUrls: ['./task-table.component.scss']
 })
-export class TaskTableComponent implements OnInit {
+export class TaskTableComponent implements OnInit, OnDestroy {
   @ViewChild('content') cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
   @Input()
@@ -56,6 +56,10 @@ export class TaskTableComponent implements OnInit {
 
   private endId = -1;
 
+  //Accessibility support
+  public focusRowId;
+  public tableRenderedRangeSub;
+
 
   constructor(
     private dialog: MatDialog,
@@ -68,6 +72,20 @@ export class TaskTableComponent implements OnInit {
     this.loadSettings();
     this.getDisplayedColumns();
     this.pivot = Math.round(this.maxPageSize / 2) - 1;
+    this.tableRenderedRangeSub = this.cdkVirtualScrollViewport.renderedRangeStream.subscribe(listrange => {
+      setTimeout(() => {
+        let row = document.getElementById(`${this.focusRowId}`);
+        if (row) {
+          row.setAttribute('tabindex', '0');
+          row.setAttribute('aira-selected', 'true');
+          row.focus();
+        }
+      }, 0);
+    })
+  }
+
+  ngOnDestroy() {
+    this.tableRenderedRangeSub.unsubscribe();
   }
 
   private setIcon(state) {
@@ -133,7 +151,6 @@ export class TaskTableComponent implements OnInit {
     }
   }
 
-
   indexChanged($event) {
     let result = this.virtualScrollService.indexChangedCalc(this.maxPageSize, this.pivot, this.cdkVirtualScrollViewport, this.dataSource, this.lastScrolled, this.startIndex);
     this.pivot = result.pivot;
@@ -144,6 +161,10 @@ export class TaskTableComponent implements OnInit {
     this.startIndex = result.startIndex;
     this.scrolled = result.scrolled;
     this.updateLastIdEvent.emit({ lastId: this.lastId, endId: this.endId });
+  }
+
+  getFocusRowId($event) {
+    this.focusRowId = $event;
   }
 
   get showScrollBar() {

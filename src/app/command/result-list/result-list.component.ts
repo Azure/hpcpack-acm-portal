@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { TableOptionComponent } from '../../widgets/table-option/table-option.component';
+import { TableOptionComponent } from '../../widgets/virtual-scroll-table/table-option/table-option.component';
 import { ApiService, Loop } from '../../services/api.service';
 import { JobStateService } from '../../services/job-state/job-state.service';
 import { TableService } from '../../services/table/table.service';
@@ -55,6 +55,10 @@ export class ResultListComponent implements OnInit {
   public selectedJobId = -1;
   public windowTitle: string;
 
+  //accessibility
+  public tableRenderedRangeSub;
+  public focusRowId;
+
   constructor(
     private api: ApiService,
     private router: Router,
@@ -65,7 +69,21 @@ export class ResultListComponent implements OnInit {
     private virtualScrollService: VirtualScrollService
   ) { }
 
+  getFocusRowId($event) {
+    this.focusRowId = $event;
+  }
+
   ngOnInit() {
+    this.tableRenderedRangeSub = this.cdkVirtualScrollViewport.renderedRangeStream.subscribe(listrange => {
+      setTimeout(() => {
+        let row = document.getElementById(`${this.focusRowId}`);
+        if (row) {
+          row.setAttribute('tabindex', '0');
+          row.setAttribute('aira-selected', 'true');
+          row.focus();
+        }
+      }, 0);
+    })
     this.loadSettings();
     this.getDisplayedColumns();
 
@@ -91,6 +109,7 @@ export class ResultListComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.tableRenderedRangeSub.unsubscribe(); 
     if (this.commandLoop) {
       Loop.stop(this.commandLoop);
     }

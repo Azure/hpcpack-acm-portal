@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 import { ChartModule } from 'angular2-chartjs';
-import { MaterialsModule } from '../materials.module';
-import { WidgetsModule } from '../widgets/widgets.module';
 import { DiagnosticsRoutingModule } from './diagnostics-routing.module';
 import { DiagnosticsComponent } from './diagnostics.component';
 import { ResultListComponent } from './result-list/result-list.component';
@@ -20,20 +17,22 @@ import { OverviewResultComponent } from './result-detail/diags/general-template/
 import { GeneralReportComponent } from './result-detail/diags/general-template/general-report/general-report.component';
 import { FailedReasonsComponent } from './result-detail/diags/mpi/pingpong/failed-reasons/failed-reasons.component';
 import { GoodNodesComponent } from './result-detail/diags/mpi/pingpong/good-nodes/good-nodes.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PerformanceComponent } from './result-detail/diags/mpi/performance/performance.component';
 import { ConnectivityComponent } from './result-detail/diags/mpi/pingpong/connectivity/connectivity.component';
+import { VirtualScrollTableModule } from '../widgets/virtual-scroll-table/virtual-scroll-table.module';
+import { EventListModule } from '../widgets/event-list/event-list.module';
+import { ContentWindowModule } from '../widgets/content-window/content-window.module';
+import { TableOptionComponent } from '../widgets/virtual-scroll-table/table-option/table-option.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     DiagnosticsRoutingModule,
-    MaterialsModule,
-    WidgetsModule,
+    VirtualScrollTableModule,
     ChartModule,
     FormsModule,
     SharedModule,
-    ScrollingModule
+    EventListModule,
+    ContentWindowModule
   ],
   declarations: [
     DiagnosticsComponent,
@@ -51,8 +50,8 @@ import { ConnectivityComponent } from './result-detail/diags/mpi/pingpong/connec
     FailedReasonsComponent,
     GoodNodesComponent,
     PerformanceComponent,
-    ConnectivityComponent
+    ConnectivityComponent,
   ],
-  entryComponents: [RingReportComponent, PingPongReportComponent, TaskDetailComponent, GeneralReportComponent]
+  entryComponents: [RingReportComponent, PingPongReportComponent, TaskDetailComponent, GeneralReportComponent, TableOptionComponent]
 })
 export class DiagnosticsModule { }

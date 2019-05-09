@@ -112,11 +112,11 @@
   "defaultProject": "hpc",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "css"
+      "prefix": "hpc",
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "hpc"
     }
   }
 }

@@ -37,7 +37,7 @@
     <div class="node-name">{{getNodeName(node)}}</div>
     <div class="tile-area">
       <div class="tile" [matTooltip]="connectivityTip(node, connectivity)" *ngFor="let connectivity of getConnectivity(node); index as i; trackBy: trackByConnectivityFn"
-        [ngClass]="connectivityClass(connectivity)" (click)="getConnectivityInfo(node,connectivity)" [tabindex]="i">
+        [ngClass]="connectivityClass(connectivity)" (click)="getConnectivityInfo(node,connectivity)" tabindex="0">
       </div>
     </div>
   </div>

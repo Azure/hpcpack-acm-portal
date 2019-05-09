@@ -9,12 +9,34 @@ export class TableService {
     public settings: UserSettingsService
   ) { }
 
+  // trackByFn(item, displayedCols) {
+  //   let identity = "";
+  //   for (let i = 0; i < displayedCols.length; i++) {
+  //     identity += item[displayedCols[i]];
+  //   }
+  //   return identity;
+  // }
+
+  hashCode(val) {
+    let s = val.toString();
+    let hash = 0, i, chr;
+    if (s.length === 0) {
+      return hash;
+    }
+    for (let i = 0; i < s.length; i++) {
+      chr = s.charAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0;
+    }
+    return hash;
+  }
+
   trackByFn(item, displayedCols) {
     let identity = "";
     for (let i = 0; i < displayedCols.length; i++) {
       identity += item[displayedCols[i]];
     }
-    return identity;
+    return this.hashCode(identity);
   }
 
   isContentScrolled(tableEle) {

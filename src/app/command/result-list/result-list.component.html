@@ -8,7 +8,7 @@
 </div>
 
 <div class="list-container">
-  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}">
+  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}" [accessibleHeader]="displayedColumns">
     <div class="header job-id" [ngStyle]="getColumnOrder('id')">
       ID
     </div>
@@ -32,11 +32,15 @@
     </div>
   </div>
   <div class="list-content">
-    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content" (scrolledIndexChange)="indexChanged($event)">
-      <div *cdkVirtualFor="let job of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)" class="list-item">
+    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content"
+      (scrolledIndexChange)="indexChanged($event)">
+      <div
+        *cdkVirtualFor="let job of dataSource; templateCacheSize: 0; let first = first; trackBy: trackByFn.bind(this)"
+        class="list-item" [class.list-row-selected]="focusRowId == job.id" [firstRow]="first" [accessibleRow]="job"
+        [id]="job.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns">
         <div class="icon-cell job-id" [ngStyle]="getColumnOrder('id')">
           <i class="material-icons cell-icon color-icon">call_to_action</i>
-          <a [routerLink]="job.id" class="cell-text">{{job.id}}</a>
+          <a [routerLink]="job.id" class="cell-text" tabindex="-1">{{job.id}}</a>
         </div>
 
         <div class="icon-cell job-created" [ngStyle]="getColumnOrder('createdAt')">
@@ -64,8 +68,8 @@
           <div class="cell-text"> {{job.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}} </div>
         </div>
 
-        <div class="icon-cell job-nodes" [ngStyle]="getColumnOrder('nodes')" (click)="getTargetNodes(job.id,job.targetNodes)"
-          [ngClass]="{'active-job': selectedJobId == job.id}">
+        <div class="icon-cell job-nodes" [ngStyle]="getColumnOrder('nodes')"
+          (click)="getTargetNodes(job.id,job.targetNodes)" [ngClass]="{'active-job': selectedJobId == job.id}">
           <i class="material-icons cell-icon">devices</i>
           <div class="cell-text"> {{job.targetNodes.length}} </div>
         </div>
@@ -80,7 +84,8 @@
   </div>
 </div>
 
-<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading"></app-loading-progress-bar>
+<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading">
+</app-loading-progress-bar>
 
 <app-content-window side="right" [title]="windowTitle" width="20" *ngIf="showTargetNodes" (showWnd)="onShowWnd($event)">
   <ng-template #wndContent>

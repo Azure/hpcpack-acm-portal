@@ -5,7 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Subscription } from 'rxjs/Subscription';
 import { NewDiagnosticsComponent } from '../new-diagnostics/new-diagnostics.component';
 import { NewCommandComponent } from '../new-command/new-command.component';
-import { TableOptionComponent } from '../../widgets/table-option/table-option.component';
+import { TableOptionComponent } from '../../widgets/virtual-scroll-table/table-option/table-option.component';
 import { ApiService, Loop } from '../../services/api.service';
 import { TableService } from '../../services/table/table.service';
 import { VirtualScrollService } from '../../services/virtual-scroll/virtual-scroll.service';
@@ -58,6 +58,12 @@ export class NodeListComponent {
   public empty = true;
   private endId = -1;
 
+  //accessibility
+  public columnOrder = {};
+  public tableRenderedRangeSub;
+  public focusRowId;
+
+
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
@@ -68,6 +74,16 @@ export class NodeListComponent {
   ) { }
 
   ngOnInit() {
+    this.tableRenderedRangeSub = this.cdkVirtualScrollViewport.renderedRangeStream.subscribe(listrange => {
+      setTimeout(() => {
+        let row = document.getElementById(`${this.focusRowId}`);
+        if (row) {
+          row.setAttribute('tabindex', '0');
+          row.setAttribute('aira-selected', 'true');
+          row.focus();
+        }
+      }, 0);
+    })
     this.dataSource.filterPredicate = this.filterPredicate;
     this.loadSettings();
     this.getDisplayedColumns();
@@ -126,7 +142,6 @@ export class NodeListComponent {
   updateUrl() {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: this.query });
   }
-
 
   filterPredicate = (data, filter) => {
     let content = "";
@@ -302,6 +317,7 @@ export class NodeListComponent {
     });
 
     let order = index + 1;
+    this.columnOrder[col] = index;
     if (order) {
       return { 'order': index + 1 };
     }
@@ -324,5 +340,9 @@ export class NodeListComponent {
 
   get showScrollBar() {
     return this.tableService.isContentScrolled(this.cdkVirtualScrollViewport.elementRef.nativeElement);
+  }
+
+  getFocusRowId($event) {
+    this.focusRowId = $event;
   }
 }

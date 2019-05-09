@@ -8,7 +8,7 @@
 </div>
 
 <div class="list-container">
-  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}">
+  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}" [accessibleHeader]="displayedColumns">
     <div class="header job-id" [ngStyle]="getColumnOrder('id')">
       ID
     </div>
@@ -38,11 +38,15 @@
     </div>
   </div>
   <div class="list-content">
-    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content" (scrolledIndexChange)="indexChanged($event)">
-      <div *cdkVirtualFor="let job of dataSource; templateCacheSize: 0; trackBy: trackByFn.bind(this)" class="list-item">
+    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content"
+      (scrolledIndexChange)="indexChanged($event)">
+      <div
+        *cdkVirtualFor="let job of dataSource; let first = first; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
+        class="list-item" [accessibleRow]="job" [id]="job.id" [class.list-row-selected]="focusRowId == job.id"
+        [firstRow]="first" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns">
         <div class="icon-cell job-id" [ngStyle]="getColumnOrder('id')" (click)="goDetailPage(job.id)">
           <i class="material-icons cell-icon color-icon">local_hospital</i>
-          <a [routerLink]="job.id" class="cell-text">{{job.id}}</a>
+          <a [routerLink]="job.id" class="cell-text" tabindex="-1">{{job.id}}</a>
         </div>
 
         <div class="icon-cell job-created" [ngStyle]="getColumnOrder('createdAt')">
@@ -51,15 +55,15 @@
         </div>
 
         <div class="icon-cell job-category" [ngStyle]="getColumnOrder('category')">
-          {{job.diagnosticTest.category}}
+          <div class="cell-text">{{job.diagnosticTest.category}}</div>
         </div>
 
         <div class="icon-cell job-item" [ngStyle]="getColumnOrder('item')">
-          {{job.diagnosticTest.name}}
+          <div class="cell-text">{{job.diagnosticTest.name}}</div>
         </div>
 
         <div class="icon-cell job-name" [ngStyle]="getColumnOrder('name')">
-          {{job.name}}
+          <div class="cell-text">{{job.name}}</div>
         </div>
 
         <div class="icon-cell job-state" [ngStyle]="getColumnOrder('state')">
@@ -67,20 +71,20 @@
           <div class="cell-text">{{job.state | titlecase}}</div>
         </div>
 
-        <div class="table-progress job-progress" [ngStyle]="getColumnOrder('progress')">
+        <div class="icon-cell table-progress job-progress" [ngStyle]="getColumnOrder('progress')">
           <mat-progress-bar mode="determinate" [value]="job.progress * 100"></mat-progress-bar>
-          <div class="progress-num"> {{job.progress | percent}} </div>
+          <div class="progress-num cell-text">{{job.progress | percent}}</div>
         </div>
 
         <div class="icon-cell job-updated" [ngStyle]="getColumnOrder('updatedAt')">
           <i class="material-icons cell-icon">access_alarm</i>
-          <div class="cell-text"> {{job.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}} </div>
+          <div class="cell-text">{{job.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}}</div>
         </div>
 
-        <div class="icon-cell job-nodes" [ngStyle]="getColumnOrder('nodes')" (click)="getTargetNodes(job.id,job.targetNodes)"
-          [ngClass]="{'active-job': selectedJobId == job.id}">
+        <div class="icon-cell job-nodes" [ngStyle]="getColumnOrder('nodes')"
+          (click)="getTargetNodes(job.id,job.targetNodes)" [ngClass]="{'active-job': selectedJobId == job.id}">
           <i class="material-icons cell-icon">devices</i>
-          <div class="cell-text"> {{job.targetNodes.length}} </div>
+          <div class="cell-text">{{job.targetNodes.length}}</div>
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
@@ -93,7 +97,8 @@
   </div>
 </div>
 
-<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading"></app-loading-progress-bar>
+<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading">
+</app-loading-progress-bar>
 
 <app-content-window side="right" [title]="windowTitle" width="20" *ngIf="showTargetNodes" (showWnd)="onShowWnd($event)"
   #contentWnd>

@@ -708,7 +708,7 @@ export class Loop {
           setTimeout(_loop, _interval);
         },
         err => {
-          if (observer.error) {
+          if (observer.error) { 
             //404 not found error should continue to query in command task result request
             looper.ended = observer.error(err);
             if (!looper.ended) {

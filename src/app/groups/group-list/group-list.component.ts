@@ -27,7 +27,7 @@ export class GroupListComponent implements OnInit {
   lastScrolled = 0;
 
   public loading = false;
-  public empty = true;
+  public empty = true;  
 
   selectedGroup = '';
   public windowTitle: string;

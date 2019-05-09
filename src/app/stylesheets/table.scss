@@ -207,9 +207,22 @@ mat-header-cell {
 }
 
 
-.list-item:hover {
+.list-item,
+.list-header {
+  &:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: #eeeeee;
+    border: 1px solid $color;
+  }
+}
+
+
+.list-row-selected {
   background-color: #eeeeee;
-  cursor: pointer;
 }
 
 .flex-vcenter {
