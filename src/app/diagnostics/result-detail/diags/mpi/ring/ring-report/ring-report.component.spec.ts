@@ -138,7 +138,7 @@ class DiagReportServiceStub {
   }
 }
 
-fdescribe('RingReportComponent', () => {
+describe('RingReportComponent', () => {
   let component: RingReportComponent;
   let fixture: ComponentFixture<RingReportComponent>;
 

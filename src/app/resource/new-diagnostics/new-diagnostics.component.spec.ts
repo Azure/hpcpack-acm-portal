@@ -103,7 +103,7 @@ class AuthServiceStub {
   }
 }
 
-fdescribe('NewDiagnosticsComponent', () => {
+describe('NewDiagnosticsComponent', () => {
   let component: NewDiagnosticsComponent;
   let fixture: ComponentFixture<NewDiagnosticsComponent>;
 

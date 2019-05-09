@@ -109,7 +109,7 @@ class TableServiceStub {
   }
 }
 
-fdescribe('ClusrunResultDetailComponent', () => {
+describe('ClusrunResultDetailComponent', () => {
   let component: ResultDetailComponent;
   let fixture: ComponentFixture<ResultDetailComponent>;
 

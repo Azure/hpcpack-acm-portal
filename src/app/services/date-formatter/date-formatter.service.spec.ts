@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { DateFormatterService } from './date-formatter.service';
 
-fdescribe('DateFormatterService', () => {
+describe('DateFormatterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [DateFormatterService]

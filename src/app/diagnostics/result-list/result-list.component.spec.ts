@@ -60,7 +60,7 @@ const TableServiceStub = {
   isContentScrolled: () => false
 }
 
-fdescribe('DiagResultListComponent', () => {
+describe('DiagResultListComponent', () => {
   let component: ResultListComponent;
   let fixture: ComponentFixture<ResultListComponent>;
   let viewport: CdkVirtualScrollViewport;

@@ -19,7 +19,7 @@ class RouterLinkDirectiveStub {
   }
 }
 
-fdescribe('FailedReasonsComponent', () => {
+describe('FailedReasonsComponent', () => {
   let component: FailedReasonsComponent;
   let fixture: ComponentFixture<FailedReasonsComponent>;
 

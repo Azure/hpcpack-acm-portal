@@ -1,0 +1,42 @@
+pool:
+  name: Hosted Ubuntu 1604
+  demands: npm
+
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 8.x'
+  inputs:
+    versionSpec: 8.x
+    checkLatest: true
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run test-single-headless'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results TESTS-*.xml'
+  inputs:
+    testResultsFiles: 'TESTS-*.xml'
+    failTaskOnFailedTests: true
+  condition: always()
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Portal'
+  inputs:
+    PathtoPublish: dist
+    ArtifactName: dist

@@ -77,7 +77,7 @@ const TableServiceStub = {
   isContentScrolled: () => false
 }
 
-fdescribe('NodeListComponent', () => {
+describe('NodeListComponent', () => {
   let component: NodeListComponent;
   let fixture: ComponentFixture<NodeListComponent>;
   let viewport: CdkVirtualScrollViewport;

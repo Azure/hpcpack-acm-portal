@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 class MatDialogModuleMock { }
 
-fdescribe('CommandInputComponent', () => {
+describe('CommandInputComponent', () => {
   let component: CommandInputComponent;
   let fixture: ComponentFixture<CommandInputComponent>;
 

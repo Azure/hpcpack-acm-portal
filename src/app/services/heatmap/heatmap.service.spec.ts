@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { HeatmapService } from './heatmap.service';
 
-fdescribe('HeatmapService', () => {
+describe('HeatmapService', () => {
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   routerSpy.navigate.and.returnValue('');
   let heatmapService: HeatmapService;

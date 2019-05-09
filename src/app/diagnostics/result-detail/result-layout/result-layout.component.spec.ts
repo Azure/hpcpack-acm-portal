@@ -28,7 +28,7 @@ class JobStateServiceStub {
   }
 }
 
-fdescribe('ResultLayoutComponent', () => {
+describe('ResultLayoutComponent', () => {
   let component: ResultLayoutComponent;
   let fixture: ComponentFixture<ResultLayoutComponent>;
 

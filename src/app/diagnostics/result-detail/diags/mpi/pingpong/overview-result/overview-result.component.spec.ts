@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'angular2-chartjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('PingPongOverviewResultComponent', () => {
+describe('PingPongOverviewResultComponent', () => {
   let component: PingPongOverviewResultComponent;
   let fixture: ComponentFixture<PingPongOverviewResultComponent>;
 

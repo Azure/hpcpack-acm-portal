@@ -9,7 +9,7 @@ class MatDialogModuleMock {
   close() { }
 }
 
-fdescribe('ConfirmDialogComponent', () => {
+describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
   let fixture: ComponentFixture<ConfirmDialogComponent>;
 

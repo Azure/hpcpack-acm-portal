@@ -3,7 +3,7 @@ import { ChartModule } from 'angular2-chartjs';
 import { JobOverviewComponent } from './job-overview.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
-fdescribe('JobOverviewComponent', () => {
+describe('JobOverviewComponent', () => {
   let component: JobOverviewComponent;
   let fixture: ComponentFixture<JobOverviewComponent>;
   const routerSpy = jasmine.createSpyObj('Router', ['navigate']);

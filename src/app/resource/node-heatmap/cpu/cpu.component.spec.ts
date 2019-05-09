@@ -9,7 +9,7 @@ const routerStub = {
   navigate: () => { },
 }
 
-fdescribe('CpuComponent', () => {
+describe('CpuComponent', () => {
   let component: CpuComponent;
   let fixture: ComponentFixture<CpuComponent>;
 

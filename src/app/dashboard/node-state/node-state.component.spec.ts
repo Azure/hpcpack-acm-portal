@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NodeStateComponent } from './node-state.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
-fdescribe('NodeStateComponent', () => {
+describe('NodeStateComponent', () => {
   let component: NodeStateComponent;
   let fixture: ComponentFixture<NodeStateComponent>;
   const routerSpy = jasmine.createSpyObj('Router', ['navigate']);

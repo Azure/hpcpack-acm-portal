@@ -8,7 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 class MatDialogModuleMock { }
 
-fdescribe('NewCommandComponent', () => {
+describe('NewCommandComponent', () => {
   let component: NewCommandComponent;
   let fixture: ComponentFixture<NewCommandComponent>;
 

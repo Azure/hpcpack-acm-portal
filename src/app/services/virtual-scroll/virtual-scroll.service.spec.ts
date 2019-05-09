@@ -1,6 +1,6 @@
 import { VirtualScrollService } from './virtual-scroll.service';
 
-fdescribe('VirtualScrollService', () => {
+describe('VirtualScrollService', () => {
   let virtualScrollService: VirtualScrollService;
   beforeEach(() => {
     virtualScrollService = new VirtualScrollService();
