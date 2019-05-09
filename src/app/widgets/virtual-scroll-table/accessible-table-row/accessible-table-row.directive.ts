@@ -19,6 +19,8 @@ export class AccessibleTableRowDirective implements OnChanges {
   private childrenDoms;
   // add header info using displayedColumns 
   @Input() displayedColumns;
+  //ensure only one item is focusable when table is focus out
+  @Input() focusRowId;
 
   // using mat-checkbox, so query mat-checkbox label and invoke click event to change checkbox value
   private checkbox: HTMLElement;
@@ -73,6 +75,9 @@ export class AccessibleTableRowDirective implements OnChanges {
 
   @HostListener('blur')
   onRowBlur() {
+    if (this.accessibleRow.id == this.focusRowId) {
+      return;
+    }
     this.selected = false;
     this.tabindex = -1;
     this.makeChildrenNotFocusable();

@@ -37,7 +37,7 @@
       <div
         *cdkVirtualFor="let job of dataSource; templateCacheSize: 0; let first = first; trackBy: trackByFn.bind(this)"
         class="list-item" [class.list-row-selected]="focusRowId == job.id" [firstRow]="first" [accessibleRow]="job"
-        [id]="job.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns">
+        [id]="job.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns" [focusRowId]="focusRowId">
         <div class="icon-cell job-id" [ngStyle]="getColumnOrder('id')">
           <i class="material-icons cell-icon color-icon">call_to_action</i>
           <a [routerLink]="job.id" class="cell-text" tabindex="-1">{{job.id}}</a>

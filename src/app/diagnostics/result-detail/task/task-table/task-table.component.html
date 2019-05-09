@@ -23,7 +23,8 @@
       <div
         *cdkVirtualFor="let task of dataSource; let index = index; let count = count; let first = first; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
         class="list-item" [class.list-row-selected]="focusRowId == task.id" [firstRow]="first" [accessibleRow]="task"
-        [id]="task.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns">
+        [id]="task.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns"
+        [focusRowId]="focusRowId">
         <div class="icon-cell task-id" [ngStyle]="getColumnOrder('id')">
           <i class="material-icons cell-icon color-icon">timelapse</i>
           <div class="cell-text">{{task.id}}</div>

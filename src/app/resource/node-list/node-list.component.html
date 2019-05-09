@@ -81,7 +81,7 @@
         *cdkVirtualFor="let node of dataSource; let first = first; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
         class="list-item" (click)="updateSelectedNodes(node)" [accessibleRow]="node" [id]="node.id"
         [displayedColumns]="displayedColumns" [class.list-row-selected]="focusRowId == node.id" [firstRow]="first"
-        (focusRow)="getFocusRowId($event)">
+        (focusRow)="getFocusRowId($event)" [focusRowId]="focusRowId">
         <div class="icon-cell node-checkbox">
           <div class="cell-text" [style.display]="'none'">checkbox</div>
           <mat-checkbox color="primary" (click)="$event.stopPropagation();" tabindex="-1"
