@@ -15,7 +15,8 @@ export class AccessibleTableHeaderDirective implements OnChanges {
   constructor(private el: ElementRef) { }
 
   getDescription() {
-    this.description = this.accessibleHeader.join(' ');
+    this.description = "table header "
+    this.description += this.accessibleHeader.join(' ');
   }
 
   get isHeaderSelectable() {
