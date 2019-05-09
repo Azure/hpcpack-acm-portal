@@ -71,6 +71,13 @@ export class AccessibleTableRowDirective implements OnChanges {
     this.makeChildrenFocusable();
   }
 
+  @HostListener('blur')
+  onRowBlur() {
+    this.selected = false;
+    this.tabindex = -1;
+    this.makeChildrenNotFocusable();
+  }
+
   // only focus row's children elements could be tabbable
   makeChildrenFocusable() {
     this.childrenDoms.forEach(element => {
