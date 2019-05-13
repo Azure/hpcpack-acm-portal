@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScrollToTopComponent } from './scroll-to-top.component';
-import { MaterialsModule } from '../../materials.module';
+import { MaterialsModule } from '../../../materials.module';
 
 describe('ScrollToTopComponent', () => {
   let component: ScrollToTopComponent;

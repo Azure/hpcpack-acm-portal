@@ -6,10 +6,11 @@ import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog } from '@angular/material';
-import { MaterialsModule } from '../../materials.module';
 import { NodeListComponent } from './node-list.component';
 import { TableService } from '../../services/table/table.service';
-import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { SharedModule } from '../../shared.module';
+import { VirtualScrollTableModule } from '../../widgets/virtual-scroll-table/virtual-scroll-table.module';
 
 @Directive({
   selector: '[routerLink]',
@@ -92,8 +93,8 @@ describe('NodeListComponent', () => {
       imports: [
         NoopAnimationsModule,
         FormsModule,
-        MaterialsModule,
-        ScrollingModule
+        SharedModule,
+        VirtualScrollTableModule
       ],
       providers: [
         { provide: ApiService, useClass: ApiServiceStub },

@@ -16,8 +16,6 @@ import { EventListComponent } from '../../widgets/event-list/event-list.componen
 import { PingPongOverviewResultComponent } from './diags/mpi/pingpong/overview-result/overview-result.component';
 import { GoodNodesComponent } from './diags/mpi/pingpong/good-nodes/good-nodes.component';
 import { FailedReasonsComponent } from './diags/mpi/pingpong/failed-reasons/failed-reasons.component';
-import { LoadingProgressBarComponent } from '../../widgets/loading-progress-bar/loading-progress-bar.component';
-import { ScrollToTopComponent } from '../../widgets/scroll-to-top/scroll-to-top.component';
 import { CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NgModule } from '@angular/core';
 import { ChartModule } from 'angular2-chartjs';
 import { CommonModule } from '@angular/common';
@@ -26,6 +24,7 @@ import { TableService } from '../../services/table/table.service';
 import { JobStateService } from '../../services/job-state/job-state.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { VirtualScrollTableModule } from '../../widgets/virtual-scroll-table/virtual-scroll-table.module';
 
 @Directive({
   selector: '[routerLink]',
@@ -107,13 +106,11 @@ const routerStub = {
     GeneralReportComponent,
     FailedReasonsComponent,
     GoodNodesComponent,
-    ScrollToTopComponent,
-    LoadingProgressBarComponent,
     EventListComponent,
     RouterLinkDirectiveStub
   ],
   imports: [
-    MaterialsModule, ChartModule, CommonModule, FormsModule, ScrollingModule
+    MaterialsModule, ChartModule, CommonModule, FormsModule, ScrollingModule, VirtualScrollTableModule
   ],
   entryComponents: [
     GeneralReportComponent, RingReportComponent, PingPongReportComponent

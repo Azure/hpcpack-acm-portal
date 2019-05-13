@@ -8,8 +8,9 @@ import { ApiService } from '../../services/api.service';
 import { JobStateService } from '../../services/job-state/job-state.service';
 import { ResultListComponent } from './result-list.component';
 import { TableService } from '../../services/table/table.service';
-import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Router, ActivatedRoute } from '@angular/router';
+import { VirtualScrollTableModule } from '../../widgets/virtual-scroll-table/virtual-scroll-table.module';
 
 @Directive({
   selector: '[routerLink]',
@@ -76,7 +77,7 @@ describe('DiagResultListComponent', () => {
         NoopAnimationsModule,
         FormsModule,
         MaterialsModule,
-        ScrollingModule
+        VirtualScrollTableModule
       ],
       providers: [
         { provide: ApiService, useClass: ApiServiceStub },

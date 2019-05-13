@@ -1,13 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs/observable/of';
 import { TaskTableComponent } from './task-table.component';
-import { MaterialsModule } from '../../../../materials.module';
-import { MatTableDataSource } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { JobStateService } from '../../../../services/job-state/job-state.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { TableService } from '../../../../services/table/table.service';
+import { SharedModule } from '../../../../shared.module';
+import { VirtualScrollTableModule } from '../../../../widgets/virtual-scroll-table/virtual-scroll-table.module';
 
 const TableServiceStub = {
   updateData: (newData, dataSource, propertyName) => newData,
@@ -36,8 +35,8 @@ describe('TaskTableComponent', () => {
         TaskTableComponent
       ],
       imports: [
-        MaterialsModule,
-        ScrollingModule,
+        SharedModule,
+        VirtualScrollTableModule,
         NoopAnimationsModule
       ],
       providers: [

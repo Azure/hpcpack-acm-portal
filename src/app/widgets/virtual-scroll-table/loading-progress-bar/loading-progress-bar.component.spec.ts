@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadingProgressBarComponent } from './loading-progress-bar.component';
-import { MaterialsModule } from '../../materials.module';
+import { MaterialsModule } from '../../../materials.module';
 
 describe('LoadingProgressBarComponent', () => {
   let component: LoadingProgressBarComponent;

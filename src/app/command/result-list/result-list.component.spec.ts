@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
-import { Component, Directive, Input, TrackByFunction, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { FormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,9 +8,10 @@ import { ApiService } from '../../services/api.service';
 import { JobStateService } from '../../services/job-state/job-state.service';
 import { ResultListComponent } from './result-list.component';
 import { TableService } from '../../services/table/table.service';
-import { ScrollingModule, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { animationFrameScheduler } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { VirtualScrollTableModule } from '../../widgets/virtual-scroll-table/virtual-scroll-table.module';
 
 @Directive({
   selector: '[routerLink]',
@@ -87,7 +88,7 @@ describe('ClusrunResultListComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         MaterialsModule,
-        ScrollingModule
+        VirtualScrollTableModule
       ],
       providers: [
         { provide: ApiService, useClass: ApiServiceStub },
