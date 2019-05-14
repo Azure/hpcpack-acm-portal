@@ -127,10 +127,6 @@ export class NodeGroupComponent implements OnInit {
     this.isNewGroup = false;
   }
 
-  public updateList(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
-  }
-
   close(){
     let params = { isNewGroup: this.isNewGroup, newGroup: this.newGroup, selectedGroups: this.selectedGroups};
     this.dialogRef.close(params);

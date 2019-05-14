@@ -8,10 +8,6 @@
       </div>
     </button>
   </div>
-  <mat-form-field class="filter" *ngIf="!isNewGroup">
-    <input matInput (keyup)="updateList(keyword)" [(ngModel)]="keyword" placeholder="Filter by keyword">
-    <mat-hint align="end">{{dataSource.filteredData.length}} results</mat-hint>
-  </mat-form-field>
   <div class="new-group" *ngIf="isNewGroup">
     <mat-form-field class="new-group">
       <input matInput [(ngModel)]="newGroup.name" placeholder="new group name" autofocus>
@@ -20,7 +16,7 @@
       <input matInput [(ngModel)]="newGroup.description" placeholder="new group description">
     </mat-form-field>
   </div>
-  <div class="groups" #nodes *ngIf="!isNewGroup">
+  <div class="groups" #nodes>
     <div class="group" *ngFor="let group of dataSource.filteredData" (click)="updateSelectedGroups(group)">
       <mat-checkbox color="primary" (click)="$event.stopPropagation();"
         (change)="$event? updateSelectedGroups(group) : null" [checked]="isSelectedGroup(group)">

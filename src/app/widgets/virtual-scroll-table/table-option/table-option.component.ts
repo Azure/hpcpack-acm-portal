@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import DragonDrop from 'drag-on-drop';
+import * as DragonDrop from 'drag-on-drop';
 
 @Component({
   templateUrl: './table-option.component.html',

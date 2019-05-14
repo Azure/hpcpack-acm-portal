@@ -13,6 +13,7 @@ import { TaskErrorComponent } from './node-selector/task-error/task-error.compon
 import { MultiCmdsComponent } from './multi-cmds/multi-cmds.component';
 import { VirtualScrollTableModule } from '../widgets/virtual-scroll-table/virtual-scroll-table.module';
 import { ContentWindowModule } from '../widgets/content-window/content-window.module';
+import { TableOptionComponent } from '../widgets/virtual-scroll-table/table-option/table-option.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,6 @@ import { ContentWindowModule } from '../widgets/content-window/content-window.mo
     TaskErrorComponent,
     MultiCmdsComponent,
   ],
-  entryComponents: [CommandInputComponent, TaskErrorComponent],
+  entryComponents: [CommandInputComponent, TaskErrorComponent, TableOptionComponent],
 })
 export class CommandModule { }

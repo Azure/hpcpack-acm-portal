@@ -255,7 +255,7 @@ export class NodeListComponent {
         });
         this.dataSource._updateChangeSubscription();
       }
-      else {
+      else if (params) {
         this.selectedNodes.forEach(ele => {
           ele['groups'] = params.selectedGroups.map(ele => {
             return ele.name;

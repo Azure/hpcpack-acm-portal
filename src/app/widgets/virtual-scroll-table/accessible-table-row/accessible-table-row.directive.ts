@@ -107,7 +107,7 @@ export class AccessibleTableRowDirective implements OnChanges {
         this.moveTo('up');
         break;
       case 'Enter':
-        if (this.isRowSelectable) {
+        if (this.isRowSelectable && document.activeElement == this.el.nativeElement) {
           this.checkbox.click();
         }
         break;

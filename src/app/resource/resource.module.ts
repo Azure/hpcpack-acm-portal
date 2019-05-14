@@ -14,6 +14,7 @@ import { SharedModule } from '../shared.module';
 import { CpuComponent } from './node-heatmap/cpu/cpu.component';
 import { NodeGroupComponent } from './node-group/node-group.component';
 import { VirtualScrollTableModule } from '../widgets/virtual-scroll-table/virtual-scroll-table.module';
+import { TableOptionComponent } from '../widgets/virtual-scroll-table/table-option/table-option.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,7 @@ import { VirtualScrollTableModule } from '../widgets/virtual-scroll-table/virtua
     CpuComponent,
     NodeGroupComponent
   ],
-  entryComponents: [NewDiagnosticsComponent, NewCommandComponent, NodeGroupComponent],
+  entryComponents: [NewDiagnosticsComponent, NewCommandComponent, NodeGroupComponent, TableOptionComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ResourceModule { }

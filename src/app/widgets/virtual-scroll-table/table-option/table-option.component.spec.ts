@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableOptionComponent } from './table-option.component';
 import { MaterialsModule } from '../../../materials.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import DragonDrop from 'drag-on-drop';
 
 class MatDialogModuleMock {
   close() { }
