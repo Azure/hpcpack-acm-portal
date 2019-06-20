@@ -6,13 +6,15 @@ import { TableOptionComponent } from './table-option/table-option.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { SharedModule } from '../../shared.module';
 import { AccessibleTableHeaderDirective } from './accessible-table-header/accessible-table-header.directive';
+import { TableHeaderColumnComponent } from './table-header-column/table-header-column.component';
 
 const declarationsArray = [
   AccessibleTableRowDirective,
   AccessibleTableHeaderDirective,
   LoadingProgressBarComponent,
   ScrollToTopComponent,
-  TableOptionComponent
+  TableOptionComponent,
+  TableHeaderColumnComponent
 ];
 
 
