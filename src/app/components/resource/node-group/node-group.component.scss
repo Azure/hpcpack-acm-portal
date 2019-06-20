@@ -1,0 +1,65 @@
+@import "mixin.scss";
+@import "dialog.scss";
+
+.groups {
+  margin: 10px;
+  padding: 15px 10px;
+  max-height: 400px;
+  overflow: auto;
+  padding-top: 0;
+}
+
+.group {
+  @include display-flex(center);
+  height: 30px;
+
+  &:hover {
+    color: $color;
+    cursor: pointer;
+  }
+
+  .group-name {
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .group-description {
+    padding-left: 10px;
+    display: inline-block;
+    @include ellipsis-text;
+  }
+}
+
+.new-group {
+  width: 100%;
+  @include display-flex(center);
+
+  .new-group-name {
+    flex: 1;
+    margin: 0 5px;
+  }
+
+  .new-group-description {
+    flex: 3;
+    margin: 0 5px;
+  }
+
+  .cancel-new-group:hover {
+    cursor: pointer;
+  }
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, .7);
+
+  .progress {
+    @include display-flex(center, center);
+    height: 100%;
+  }
+}

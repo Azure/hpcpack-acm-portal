@@ -73,8 +73,9 @@ mat-header-cell {
 
 .icon-cell {
   @include display-flex(center);
-  min-width: 2em;
-  padding: 0 10px;
+  min-width: 40px;
+  padding-left: 10px;
+  padding-right: 7px;
 }
 
 .cell-icon {
@@ -203,12 +204,20 @@ mat-header-cell {
 }
 
 .list-header .header {
-  padding: 0 10px;
+  padding-left: 10px;
+  padding-right: 5px;
+  @include display-flex(center);
+  position: relative;
+  height: 100%;
+  min-width: 40px;
+
+  .name {
+    @include ellipsis-text;
+    padding-right: 5px;
+  }
 }
 
-
-.list-item,
-.list-header {
+.list-item {
   &:hover {
     background-color: #eeeeee;
     cursor: pointer;

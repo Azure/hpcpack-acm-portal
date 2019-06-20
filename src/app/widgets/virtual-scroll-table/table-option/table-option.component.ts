@@ -77,7 +77,6 @@ export class TableOptionComponent implements OnInit {
   ngAfterViewInit() {
     this.dragonSeletced.initElements(this.selectedEle.nativeElement);
     this.dragonOptions.initElements(this.optionsEle.nativeElement);
-
   }
 
   get result() {

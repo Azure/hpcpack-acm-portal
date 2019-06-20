@@ -19,10 +19,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DiagReportService } from './services/diag-report/diag-report.service';
 import { DragulaModule } from 'ng2-dragula';
 import { SharedModule } from './shared.module';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BackButtonModule } from './widgets';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { SharedModule } from './shared.module';
     ReactiveFormsModule,
     SharedModule,
     AppRoutingModule,
+    BackButtonModule,
     DragulaModule.forRoot()
   ],
   providers: [

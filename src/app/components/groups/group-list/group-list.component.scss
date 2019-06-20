@@ -1,0 +1,57 @@
+@import "mixin.scss";
+@import "table.scss";
+
+nav {
+  margin-bottom: 1em;
+}
+
+.group-name {
+  flex: 2;
+}
+
+.group-description {
+  flex: 4;
+}
+
+.group-actions {
+  flex: 1
+}
+
+.delete-icon {
+  color: rgba($color: #000000, $alpha: 0.5)
+}
+
+.group-name {
+  &:hover {
+    cursor: pointer;
+  }
+
+  .cell-text {
+    text-decoration-color: $color;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+  }
+}
+
+.nodes {
+  overflow-y: auto;
+  height: 85vh;
+
+  .node {
+    @include display-flex(center);
+    height: 25px;
+    font-size: 14px;
+
+    .cell-icon {
+      font-size: 1em;
+    }
+
+    &:hover {
+      color: $color;
+    }
+  }
+}
+
+.edit-input {
+  width: 100%;
+}

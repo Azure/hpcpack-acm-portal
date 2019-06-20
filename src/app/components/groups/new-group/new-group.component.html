@@ -1,0 +1,30 @@
+<div class="dialog-title" mat-dialog-title>
+  <div>New Group</div>
+  <div class="close-icon" (click)="close()">
+    <i class="material-icons">close</i>
+  </div>
+</div>
+<mat-dialog-content class="dialog-content">
+  <div class="row">
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Group Name" [(ngModel)]="name" (keyup.Enter)="create()">
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <textarea matInput placeholder="Group description" [(ngModel)]="description" (keyup.Enter)="create()"></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <div class="dialog-btns dialog-action">
+    <button mat-stroked-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-flat-button color="primary" (click)="create()">Create</button>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    <button mat-icon-button (click)="clearErrorMsg()">
+      <mat-icon color="warn">clear</mat-icon>
+    </button>
+    <div class="error-text">
+      {{errorMessage}}
+    </div>
+  </div>
+</mat-dialog-actions>

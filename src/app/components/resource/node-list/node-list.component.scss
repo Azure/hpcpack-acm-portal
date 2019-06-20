@@ -1,0 +1,113 @@
+@import "mixin.scss";
+@import "table.scss";
+
+.node-checkbox {
+  flex: 0 1 30px;
+}
+
+.node-jobs,
+.node-coreCount,
+.node-memory,
+.node-state,
+.node-eventCount,
+.node-health {
+  flex: 0.5;
+}
+
+.node-os,
+.node-groups {
+  flex: 2;
+}
+
+.node-name {
+  flex: 0.8;
+}
+
+.node-os {
+  @include ellipsis-text;
+}
+
+.node-jobs,
+.node-coreCount,
+.node-memory,
+.node-eventCount {
+  @include display-flex(center, flex-end);
+}
+
+.online {
+  color: $color;
+}
+
+.offline {
+  color: #6c727c;
+}
+
+.healthy {
+  color: $color;
+}
+
+.error {
+  color: #D84315;
+}
+
+.node-error {
+  padding-left: 3px;
+}
+
+.inline {
+  display: inline;
+}
+
+.list-content {
+  height: 65vh;
+  position: relative;
+  width: 100%;
+}
+
+.window-btn {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  min-height: 30px;
+  vertical-align: top;
+  font-size: 14px;
+  padding: 0 0;
+  margin: 0;
+}
+
+.window-actions {
+  @include display-flex(center, flex-end);
+}
+
+.filter {
+  @include display-flex(center);
+
+
+  mat-form-field:first-child {
+    width: 150px;
+  }
+
+  mat-form-field:last-child {
+    flex: 1;
+  }
+
+  &>mat-form-field {
+    margin: 0 10px;
+  }
+}
+
+.action-icon {
+  color: $color;
+}
+
+.actions {
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+  button {
+    margin: 0;
+  }
+
+  .mat-button {
+    border-radius: 0;
+  }
+}

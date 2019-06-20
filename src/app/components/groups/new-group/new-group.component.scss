@@ -1,0 +1,39 @@
+@import "mixin.scss";
+mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+button {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.error-message {
+  color: #f44336;
+  line-height: 2em;
+  height: 2em;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.error-text {
+  padding-left: 0.5em;
+  font-family: $font-stack;
+}
+
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}
