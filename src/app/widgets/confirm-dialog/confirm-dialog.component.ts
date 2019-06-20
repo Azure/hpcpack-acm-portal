@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class ConfirmDialogComponent {
   title: string;
   message: string;
+  choice: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.title = data.title;

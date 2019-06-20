@@ -18,7 +18,15 @@ export class JobOverviewComponent implements OnInit, OnChanges {
   public totalJobs = 0;
   public activeJobs = 0;
   public loading = true;
-  public detailDescription = {};
+  public detailDescription: { [key: string]: string } = {
+    'Queued': '',
+    'Running': '',
+    'Finishing': '',
+    'Finished': '',
+    'Canceling': '',
+    'Canceled': '',
+    'Failed': ''
+  };
 
   private labels = [
     'Queued',

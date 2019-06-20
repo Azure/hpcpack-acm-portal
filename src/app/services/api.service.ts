@@ -580,7 +580,7 @@ export class UserApi extends Resource<any>{
 
 export class GroupApi extends Resource<any>{
   protected get url(): string {
-    return 'http://localhost:58596/v1/groups';
+    return `${this.baseUrl}/groups`;
   }
 
   getGroups() {
