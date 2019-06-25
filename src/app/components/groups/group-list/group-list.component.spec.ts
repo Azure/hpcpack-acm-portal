@@ -7,12 +7,28 @@ import { TableService, ApiService } from 'app/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA, Directive, Input } from '@angular/core';
 
 const TableServiceStub = {
   updateData: (newData, dataSource, propertyName) => newData,
   loadSetting: (key, initVal) => initVal,
   saveSetting: (key, val) => undefined,
   isContentScrolled: () => false
+}
+
+@Directive({
+  selector: '[routerLink]',
+  host: { '(click)': 'onClick()' }
+})
+class RouterLinkDirectiveStub {
+  @Input('routerLink') linkParams: any;
+  navigatedTo: any = null;
+
+  @Input('queryParams') queryParams: any;
+
+  onClick() {
+    this.navigatedTo = this.linkParams;
+  }
 }
 
 class ApiServiceStub {
@@ -45,7 +61,10 @@ describe('GroupListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GroupListComponent],
+      declarations: [
+        GroupListComponent,
+        RouterLinkDirectiveStub
+      ],
       imports: [
         SharedModule,
         VirtualScrollTableModule,
@@ -57,7 +76,8 @@ describe('GroupListComponent', () => {
         { provide: Router, useValue: routerSpy },
         { provide: ActivatedRoute, useValue: activatedRouteSpy },
         { provide: ApiService, useClass: ApiServiceStub }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));
