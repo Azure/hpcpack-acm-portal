@@ -18,7 +18,7 @@ export class GroupListComponent implements OnInit {
 
   public query = { filter: '' };
 
-  private displayedColumns = ['name', 'description'];
+  public displayedColumns = ['name', 'description'];
 
   public dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
@@ -93,7 +93,7 @@ export class GroupListComponent implements OnInit {
     let filter = this.query.filter;
     this.dataSource.filter = filter;
   }
-  
+
   newGroup(): void {
     let dialogRef = this.dialog.open(NewGroupComponent, {
       width: '60%'
