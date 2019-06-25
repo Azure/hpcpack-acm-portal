@@ -33,9 +33,12 @@ export class GroupListComponent implements OnInit {
   public windowTitle: string;
 
   //group actions
-  // selectedGroupName: string;
+  //selectedGroupName: string;
   selectedGroupId: number;
   editGroup: Group;
+
+  //Accessiblity
+  public focusRowId;
 
   constructor(
     private tableDataService: TableService,
@@ -57,7 +60,15 @@ export class GroupListComponent implements OnInit {
     this.getGroupsRequest().subscribe(data => {
       this.dataSource.data = data;
     });
+  }
 
+  ngAfterViewInit() {
+    let row = document.getElementById(`${this.focusRowId}`);
+    if (row) {
+      row.setAttribute('tabindex', '0');
+      row.setAttribute('aria-selected', 'true');
+      row.focus();
+    }
   }
 
   private getGroupsRequest() {
@@ -82,11 +93,7 @@ export class GroupListComponent implements OnInit {
     let filter = this.query.filter;
     this.dataSource.filter = filter;
   }
-
-  getNodes(name) {
-    this.router.navigate(['..', 'resource'], { relativeTo: this.route, queryParams: { filter: 'groups', keyword: name } });
-  }
-
+  
   newGroup(): void {
     let dialogRef = this.dialog.open(NewGroupComponent, {
       width: '60%'
@@ -136,8 +143,10 @@ export class GroupListComponent implements OnInit {
   }
 
   cancelEdit() {
-    console.log('cancel');
     this.selectedGroupId = -1;
   }
 
+  getFocusRowId($event) {
+    this.focusRowId = $event;
+  }
 }

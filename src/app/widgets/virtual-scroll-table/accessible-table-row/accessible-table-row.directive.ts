@@ -36,7 +36,9 @@ export class AccessibleTableRowDirective implements OnChanges {
       return Number(previous.style.order) - Number(current.style.order);
     });
     this.description += visibleCells.map((ele: HTMLElement, index: number) => {
-      return `${this.displayedColumns[index]} ${ele.querySelector('.cell-text').textContent}`
+      if (ele.querySelector('.cell-text')) {
+        return `${this.displayedColumns[index]} ${ele.querySelector('.cell-text').textContent}`
+      }
     }).join(' ');
   }
 
@@ -68,7 +70,7 @@ export class AccessibleTableRowDirective implements OnChanges {
   onRowFocus() {
     this.selected = true;
     this.tabindex = 0;
-    //emmit row id when virtual scroll changes the index to get the right focus item position in DOM.
+    //emit row id when virtual scroll changes the index to get the right focus item position in DOM.
     this.focusRow.emit(this.accessibleRow.id);
     this.makeChildrenFocusable();
   }

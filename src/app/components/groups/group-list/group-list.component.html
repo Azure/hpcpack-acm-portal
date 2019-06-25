@@ -1,7 +1,7 @@
 <div class="actions">
-  <button mat-raised-button (click)="newGroup()">
+  <button mat-button (click)="newGroup()">
     <div class="action-btn">
-      <i class="material-icons btn-icon">add</i>
+      <i class="material-icons btn-icon action-icon">add</i>
       <div class="action-text">Add Group...</div>
     </div>
   </button>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="list-container">
-  <div class="list-header" [ngClass]="{'list-header-scrolled':showScrollBar}">
+  <div class="list-header" [ngClass]="{'list-header-scrolled':showScrollBar}" [accessibleHeader]="displayedColumns">
     <div class="header group-name">
       Name
     </div>
@@ -30,14 +30,17 @@
 
   <div class="list-content">
     <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content">
-      <div *cdkVirtualFor="let group of dataSource; let i = index; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
-        class="list-item">
+      <div
+        *cdkVirtualFor="let group of dataSource; let i = index; let first = first; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
+        class="list-item" [accessibleRow]="group" [displayedColumns]="displayedColumns"
+        [class.list-row-selected]="focusRowId == group.id" [firstRow]="first" (focusRow)="getFocusRowId($event)"
+        [focusRowId]="focusRowId">
         <div class="icon-cell group-name" [ngClass]="{'active-job': selectedGroupId == group.id}">
           <i class="material-icons cell-icon color-icon">category</i>
-          <div class="cell-text color-text" *ngIf="selectedGroupId !== group.id" (click)="getNodes(group.name)">
-            {{group.name}}</div>
+          <a *ngIf="selectedGroupId !== group.id" [routerLink]="['..','resource']"
+            [queryParams]="{filter: 'groups', keyword: group.name}" class="cell-text" tabindex="-1">{{group.name}}</a>
           <mat-form-field *ngIf="selectedGroupId == group.id" class="edit-input">
-            <input matInput [(ngModel)]="editGroup.name">
+            <input matInput [(ngModel)]="editGroup.name" autofocus>
           </mat-form-field>
         </div>
 
@@ -49,15 +52,25 @@
           </mat-form-field>
         </div>
 
-        <div class="icon-cell group-actions">
+        <div class="group-actions">
           <div class="flex-vcenter" *ngIf="group.managed"> - </div>
           <div class="flex-vcenter" *ngIf="!group.managed && !(selectedGroupId == group.id)">
-            <i class="material-icons cell-icon color-icon" (click)="edit(group)">edit</i>
-            <i class="material-icons cell-icon delete-icon" (click)="delete(i, group)">delete</i>
+            <button mat-icon-button (click)="edit(group)" aria-label="Edit group information button" tabindex="-1">
+              <mat-icon class="color-icon">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(i, group)" aria-label="Delete group information button"
+              tabindex="-1">
+              <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
           </div>
           <div class="flex-vcenter" *ngIf="selectedGroupId == group.id">
-            <i class="material-icons cell-icon color-icon" (click)="saveEdit(i)">cached</i>
-            <i class="material-icons cell-icon delete-icon" (click)="cancelEdit()">close</i>
+            <button mat-icon-button (click)="saveEdit(i)" aria-label="Save edit group information button" tabindex="-1">
+              <mat-icon class="color-icon">cached</mat-icon>
+            </button>
+            <button mat-icon-button (click)="cancelEdit()" aria-label="Cancel edit group information button"
+              tabindex="-1">
+              <mat-icon class="delete-icon">close</mat-icon>
+            </button>
           </div>
         </div>
       </div>
