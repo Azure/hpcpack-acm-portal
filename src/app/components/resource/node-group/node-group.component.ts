@@ -108,12 +108,18 @@ export class NodeGroupComponent implements OnInit {
       allObservables.push(newGroupObservable);
     }
     this.loading = true;
-    forkJoin(allObservables).subscribe(
-      res => {
-        this.dialogRef.close(this.nodeGroupsMap);
-      },
-      error => console.log(error)
-    );
+    if (allObservables.length > 0) {
+      forkJoin(allObservables).subscribe(
+        res => {
+          this.dialogRef.close(this.nodeGroupsMap);
+        },
+        error => console.log(error)
+      );
+    }
+    else {
+      this.dialogRef.close(this.nodeGroupsMap);
+    }
+
   }
 
   cancelNewGroup() {
