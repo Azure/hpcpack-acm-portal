@@ -48,7 +48,7 @@ export class NodeGroupComponent implements OnInit {
   }
 
   public isSelectedGroup(group) {
-    let index = this.nodeGroups.findIndex(n => {
+    let index = this.updatedGroups.findIndex(n => {
       return n.id == group.id;
     });
     return index == -1 ? false : true;
@@ -75,7 +75,6 @@ export class NodeGroupComponent implements OnInit {
   }
 
   update() {
-    this.loading = true;
     let selectedNodeName = this.selectedNodes.map(node => node.name);
     let addGroups = this.updatedGroups.filter(ele => this.nodeGroups.findIndex(e => e.id == ele.id) == -1);
     let deleteGroups = this.nodeGroups.filter(ele => this.updatedGroups.findIndex(e => e.id == ele.id) == -1);
@@ -92,7 +91,7 @@ export class NodeGroupComponent implements OnInit {
     });
     deleteGroups.forEach(e => {
       this.selectedNodes.forEach(node => {
-        let index = this.nodeGroupsMap[`${node.id}`].findIndex(group => group.name == e.name);
+        let index = this.nodeGroupsMap[`${node.id}`].findIndex(group => group == e.name);
         this.nodeGroupsMap[`${node.id}`].splice(index, 1);
       })
     })
@@ -108,8 +107,11 @@ export class NodeGroupComponent implements OnInit {
         }))
       allObservables.push(newGroupObservable);
     }
+    this.loading = true;
     forkJoin(allObservables).subscribe(
-      res => this.dialogRef.close(this.nodeGroupsMap),
+      res => {
+        this.dialogRef.close(this.nodeGroupsMap);
+      },
       error => console.log(error)
     );
   }
