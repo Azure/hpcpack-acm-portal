@@ -1,11 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs/observable/of';
 import { BreadcrumbComponent } from './breadcrumb.component';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, Params } from '@angular/router';
 import { Directive, Input } from '@angular/core';
 
 const activatedRouteStub = {
-  paramMap: of({ get: () => 1 })
+  // params: of({ breadcrumb: 'Test' }),
+  root: {
+    children: [
+      {
+        children: [],
+        snapshot: {
+          children:[],
+          data: {
+            breadcrumb: 'Test'
+          },
+          url: [
+            { path: 'Test' }
+          ]
+        }
+      }
+    ]
+  }
 }
 
 const routerStub = {
