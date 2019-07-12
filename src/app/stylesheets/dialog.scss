@@ -69,3 +69,17 @@ mat-divider {
     padding-right: .3em;
   }
 }
+
+mat-dialog-actions {
+  @include display-flex(center, flex-end);
+  @include display-flex(center, space-between, row-reverse);
+
+  button {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+}
+
+.action-btn {
+  @include display-flex(center);
+}

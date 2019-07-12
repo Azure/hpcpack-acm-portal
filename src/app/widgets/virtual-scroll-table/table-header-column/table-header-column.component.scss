@@ -1,0 +1,19 @@
+@import 'mixin.scss';
+
+.column {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  @include display-flex(center);
+}
+
+.column-handle {
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: col-resize;
+  background-color: #6c727c;
+}

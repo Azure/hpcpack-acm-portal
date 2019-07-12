@@ -37,23 +37,23 @@ mat-header-cell {
 }
 
 .finished {
-  color: #2E7D32;
+  color: #2E7D32 !important;
 }
 
 .queued {
-  color: #FF8F00;
+  color: #FF8F00 !important;
 }
 
 .failed {
-  color: #D84315;
+  color: #D84315 !important;
 }
 
 .running {
-  color: #283593;
+  color: #283593 !important;
 }
 
 .canceled {
-  color: #6c727c;
+  color: #6c727c !important;
 }
 
 .table-progress {
@@ -73,8 +73,9 @@ mat-header-cell {
 
 .icon-cell {
   @include display-flex(center);
-  min-width: 2em;
-  padding: 0 10px;
+  min-width: 40px;
+  padding-left: 10px;
+  padding-right: 7px;
 }
 
 .cell-icon {
@@ -83,6 +84,7 @@ mat-header-cell {
   height: auto;
   margin-right: .3em;
   text-align: right;
+  color: rgba(0, 0, 0, .7);
 }
 
 .cell-text {
@@ -130,6 +132,23 @@ mat-header-cell {
 .actions button {
   margin-right: .5em;
 }
+
+.action-icon {
+  color: $color;
+}
+
+.actions {
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+  button {
+    margin: 0;
+  }
+
+  .mat-button {
+    border-radius: 0;
+  }
+}
+
 
 .list-container {
   width: 100%;
@@ -196,16 +215,42 @@ mat-header-cell {
   @include display-flex(center, center);
 }
 
-.color-icon {
+.color-icon,
+.color-text {
   color: $color;
 }
 
 .list-header .header {
-  padding: 0 10px;
+  padding-left: 10px;
+  padding-right: 5px;
+  @include display-flex(center);
+  position: relative;
+  height: 100%;
+  min-width: 40px;
+
+  .name {
+    @include ellipsis-text;
+    padding-right: 5px;
+  }
+}
+
+.list-item {
+  &:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: #eeeeee;
+    border: 1px solid $color;
+  }
 }
 
 
-.list-item:hover {
+.list-row-selected {
   background-color: #eeeeee;
-  cursor: pointer;
+}
+
+.flex-vcenter {
+  @include display-flex(center);
 }

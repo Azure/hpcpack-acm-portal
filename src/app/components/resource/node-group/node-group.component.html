@@ -1,0 +1,54 @@
+<div class="dialog-title" mat-dialog-title>
+  <div>
+    Node Groups
+  </div>
+  <div class="close-icon" (click)="close()">
+    <i class="material-icons">close</i>
+  </div>
+</div>
+
+<mat-dialog-content>
+  <div class="actions" *ngIf="!isNewGroup">
+    <button mat-button (click)="createGroup()" color="primary">
+      <div class="action-btn">
+        <i class="material-icons btn-icon">add</i>
+        <div class="action-text">New Group</div>
+      </div>
+    </button>
+  </div>
+  <div class="new-group" *ngIf="isNewGroup">
+    <mat-form-field class="new-group-name">
+      <input matInput [(ngModel)]="newGroup.name" placeholder="new group name" autofocus>
+    </mat-form-field>
+    <mat-form-field class="new-group-description">
+      <input matInput [(ngModel)]="newGroup.description" placeholder="new group description">
+    </mat-form-field>
+    <div class="cancel-new-group" (click)="cancelNewGroup()">
+      <button mat-button>cancel</button>
+    </div>
+  </div>
+  <div class="groups" #nodes>
+    <div class="group" *ngFor="let group of dataSource.filteredData" (click)="updateSelectedGroups(group)">
+      <mat-checkbox color="primary" (click)="$event.stopPropagation();"
+        (change)="$event? updateSelectedGroups(group) : null" [checked]="isSelectedGroup(group)"
+        [disabled]="group.managed">
+        <div class="group-name">{{group.name}}</div>
+      </mat-checkbox>
+      <div class="group-description">
+        - {{group.description}}
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div>
+    <button mat-stroked-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-flat-button color="primary" (click)="update()">Update</button>
+  </div>
+</mat-dialog-actions>
+
+<div class="shade" *ngIf="loading">
+  <div class="progress">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

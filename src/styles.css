@@ -49,3 +49,7 @@ body {
     "Helvetica Neue",
     sans-serif;
 }
+
+mat-dialog-container {
+  position: relative !important;
+}

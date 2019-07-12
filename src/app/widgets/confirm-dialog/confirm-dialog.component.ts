@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   templateUrl: './confirm-dialog.component.html',
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ConfirmDialogComponent {
   title: string;
   message: string;
+  choice: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.title = data.title;

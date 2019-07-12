@@ -1,0 +1,21 @@
+@import "mixin.scss";
+@import "dialog.scss";
+
+.cmd-line {
+  width: 100%;
+}
+
+.checkbox-section {
+  height: 60px;
+}
+
+.timeout-text {
+  font-size: 14px;
+}
+
+.radio-btn {
+  padding-right: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  padding-top: 10px;
+}

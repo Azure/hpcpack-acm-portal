@@ -534,7 +534,6 @@ export class DiagApi extends Resource<any> {
 
   getJobEvents(jobId: string) {
     return this.httpGet(`${this.url}/${jobId}/events`);
-
   }
 }
 
@@ -579,6 +578,46 @@ export class UserApi extends Resource<any>{
   }
 }
 
+export class GroupApi extends Resource<any>{
+  protected get url(): string {
+    return `${this.baseUrl}/groups`;
+  }
+
+  getGroups() {
+    let url = `${this.url}`;
+    return this.httpGet(url);
+  }
+
+  createGroup(group) {
+    let url = `${this.url}`;
+    return this.http.post<any>(
+      url,
+      group,
+      { observe: 'response', responseType: 'json' }
+    ).pipe(this.errorHandler);
+  }
+
+  updateGroup(group) {
+    let url = `${this.url}/${group.id}`;
+    return this.http.put<any>(url, group).pipe(this.errorHandler);
+  }
+
+  deleteGroup(id) {
+    let url = `${this.url}/${id}`;
+    return this.http.delete<any>(url).pipe(this.errorHandler);
+  }
+
+  updateNodeGroups(type, id, nodeNames) {
+    let url = `${this.url}/${id}/nodes`;
+    if (type == 'delete') {
+      return this.http.request<any>('Delete', url, { body: nodeNames }).pipe(this.errorHandler);
+    }
+    else if (type == 'add') {
+      return this.http.post<any>(url, nodeNames).pipe(this.errorHandler);
+    }
+  }
+}
+
 @Injectable()
 export class ApiService {
   private nodeApi: NodeApi;
@@ -594,6 +633,8 @@ export class ApiService {
   private dashboardApi: DashboradApi;
 
   private userApi: UserApi;
+
+  private groupApi: GroupApi;
 
   constructor(private http: HttpClient) { }
 
@@ -644,6 +685,13 @@ export class ApiService {
       this.userApi = new UserApi(this.http);
     }
     return this.userApi;
+  }
+
+  get group(): GroupApi {
+    if (!this.groupApi) {
+      this.groupApi = new GroupApi(this.http);
+    }
+    return this.groupApi;
   }
 
   static isJSON(item) {

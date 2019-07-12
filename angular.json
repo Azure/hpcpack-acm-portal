@@ -23,6 +23,11 @@
             "styles": [
               "src/styles.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/stylesheets"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -63,6 +68,11 @@
             "styles": [
               "src/styles.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/stylesheets"
+              ]
+            },
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -112,11 +122,11 @@
   "defaultProject": "hpc",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "css"
+      "prefix": "hpc",
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "hpc"
     }
   }
 }

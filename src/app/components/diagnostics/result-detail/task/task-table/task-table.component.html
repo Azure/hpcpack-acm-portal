@@ -1,0 +1,61 @@
+<div class="list-container">
+  <div class="list-header" [ngClass]="{'list-header-scrolled': showScrollBar}" [accessibleHeader]="displayedColumns">
+    <div class="header task-id" [ngStyle]="getColumnOrder('id')">
+      ID
+    </div>
+    <div class="header task-node" [ngStyle]="getColumnOrder('node')">
+      Allocated Node
+    </div>
+    <div class="header task-state" [ngStyle]="getColumnOrder('state')">
+      State
+    </div>
+    <div class="header task-remark" [ngStyle]="getColumnOrder('remark')">
+      Remark
+    </div>
+    <div class="header task-detail" [ngStyle]="getColumnOrder('detail')">
+      Detail
+    </div>
+  </div>
+
+  <div class="list-content">
+    <cdk-virtual-scroll-viewport itemSize="40" #content class="list-content"
+      (scrolledIndexChange)="indexChanged($event)">
+      <div
+        *cdkVirtualFor="let task of dataSource; let index = index; let count = count; let first = first; templateCacheSize: 0; trackBy: trackByFn.bind(this)"
+        class="list-item" [class.list-row-selected]="focusRowId == task.id" [firstRow]="first" [accessibleRow]="task"
+        [id]="task.id" (focusRow)="getFocusRowId($event)" [displayedColumns]="displayedColumns"
+        [focusRowId]="focusRowId">
+        <div class="icon-cell task-id" [ngStyle]="getColumnOrder('id')">
+          <i class="material-icons cell-icon color-icon">timelapse</i>
+          <div class="cell-text">{{task.id}}</div>
+        </div>
+        <div class="icon-cell task-node" [ngStyle]="getColumnOrder('node')">
+          <i class="material-icons cell-icon">desktop_windows</i>
+          <div class="cell-text">{{task.node}}</div>
+        </div>
+        <div class="icon-cell task-state" [ngStyle]="getColumnOrder('state')">
+          <i class="material-icons cell-icon" [ngClass]="stateClass(task.state)">{{setIcon(task.state)}}</i>
+          <div class="cell-text">{{task.state}}</div>
+        </div>
+        <div class="icon-cell task-remark" [ngStyle]="getColumnOrder('remark')">
+          <div class="cell-text">{{task.customizedData}}</div>
+        </div>
+        <div class="icon-cell task-detail" [ngStyle]="getColumnOrder('detail')">
+          <div class="cell-text" [style.display]="'none'">button</div>
+          <button mat-icon-button (click)="showDetail(task.jobId, task.id, task.state)" tabindex="-1">
+            <i class="material-icons color-icon">settings_ethernet</i>
+          </button>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+
+    <app-scroll-to-top [scrolled]="scrolled" [targetEle]="content"></app-scroll-to-top>
+
+    <div class="list-loading" *ngIf="empty">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<app-loading-progress-bar [loadFinished]="loadFinished" [hidden]="!loading || !scrolled" class="virtual-scroll-loading">
+</app-loading-progress-bar>

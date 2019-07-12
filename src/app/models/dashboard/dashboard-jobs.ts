@@ -4,5 +4,6 @@ export class DashboardJobs {
     Failed: number;
     Finished: number;
     Queued: number;
-    Running: number
+    Running: number;
+    Finishing: number;
 }
