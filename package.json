@@ -29,7 +29,7 @@
     "angular2-chartjs": "^0.5.1",
     "core-js": "^2.5.5",
     "hoek": "^6.1.2",
-    "moment": "^2.19.3",
+    "moment": "^2.29.4",
     "ng2-dragula": "^2.1.1",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
